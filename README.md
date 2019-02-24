@@ -1,3 +1,2 @@
 # The Toutnament Director
-Something
-rrrr
+## Краткое описание
