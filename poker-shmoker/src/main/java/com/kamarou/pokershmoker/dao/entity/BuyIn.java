@@ -17,6 +17,9 @@ public class BuyIn extends BaseEntity {
   private String dateBuy;
 
   @Column
+  private String endDayBuy;
+
+  @Column
   private boolean isBuy;
 
   @OneToOne(mappedBy = "buyIn")
@@ -25,8 +28,10 @@ public class BuyIn extends BaseEntity {
   public BuyIn() {
   }
 
-  public BuyIn(String dateBuy, boolean isBuy, Player player) {
+  public BuyIn(String dateBuy, String endDayBuy, boolean isBuy,
+      Player player) {
     this.dateBuy = dateBuy;
+    this.endDayBuy = endDayBuy;
     this.isBuy = isBuy;
     this.player = player;
   }
@@ -55,6 +60,14 @@ public class BuyIn extends BaseEntity {
     this.player = player;
   }
 
+  public String getEndDayBuy() {
+    return endDayBuy;
+  }
+
+  public void setEndDayBuy(String endDayBuy) {
+    this.endDayBuy = endDayBuy;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -69,18 +82,19 @@ public class BuyIn extends BaseEntity {
     BuyIn buyIn = (BuyIn) o;
     return isBuy == buyIn.isBuy &&
         Objects.equals(dateBuy, buyIn.dateBuy) &&
-        Objects.equals(player, buyIn.player);
+        Objects.equals(endDayBuy, buyIn.endDayBuy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), dateBuy, isBuy, player);
+    return Objects.hash(super.hashCode(), dateBuy, endDayBuy, isBuy);
   }
 
   @Override
   public String toString() {
     return "BuyIn{" +
-        "dateBuy=" + dateBuy +
+        "dateBuy='" + dateBuy + '\'' +
+        ", endDayBuy='" + endDayBuy + '\'' +
         ", isBuy=" + isBuy +
         ", id=" + id +
         '}';

@@ -7,16 +7,19 @@ public class BuyInDTO implements Serializable {
 
   private String id;
   private String date;
+  private String endDate;
   private boolean isBuy;
 
-  public BuyInDTO(String id, String date, boolean isBuy) {
+  public BuyInDTO(String id, String date, String endDate, boolean isBuy) {
     this.id = id;
     this.date = date;
+    this.endDate = endDate;
     this.isBuy = isBuy;
   }
 
-  public BuyInDTO(String date, boolean isBuy) {
+  public BuyInDTO(String date, String endDate, boolean isBuy) {
     this.date = date;
+    this.endDate = endDate;
     this.isBuy = isBuy;
   }
 
@@ -47,6 +50,14 @@ public class BuyInDTO implements Serializable {
     isBuy = buy;
   }
 
+  public String getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+    this.endDate = endDate;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -57,19 +68,22 @@ public class BuyInDTO implements Serializable {
     }
     BuyInDTO buyInDTO = (BuyInDTO) o;
     return isBuy == buyInDTO.isBuy &&
-        Objects.equals(date, buyInDTO.date);
+        Objects.equals(id, buyInDTO.id) &&
+        Objects.equals(date, buyInDTO.date) &&
+        Objects.equals(endDate, buyInDTO.endDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(date, isBuy);
+    return Objects.hash(id, date, endDate, isBuy);
   }
 
   @Override
   public String toString() {
     return "BuyInDTO{" +
-        "id=" + id +
+        "id='" + id + '\'' +
         ", date='" + date + '\'' +
+        ", endDate='" + endDate + '\'' +
         ", isBuy=" + isBuy +
         '}';
   }
