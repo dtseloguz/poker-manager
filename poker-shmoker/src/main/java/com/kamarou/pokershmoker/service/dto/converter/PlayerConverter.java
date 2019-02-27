@@ -19,6 +19,7 @@ public class PlayerConverter implements Converter<PlayerDTO, Player> {
         player.getAge());
     playerDTO.setBuyInDTO(new BuyInDTO(player.getBuy().getId().toString(),
         player.getBuy().getDateBuy(),
+        player.getBuy().getEndDayBuy(),
         player.getBuy().isBuy()));
     return playerDTO;
   }
@@ -29,7 +30,8 @@ public class PlayerConverter implements Converter<PlayerDTO, Player> {
         playerDTO.getPatronymic(),
         playerDTO.getAge());
     player.setBuy(
-        new BuyIn(playerDTO.getBuyInDTO().getDate(), playerDTO.getBuyInDTO().isBuy(), player));
+        new BuyIn(playerDTO.getBuyInDTO().getDate(), playerDTO.getBuyInDTO().getEndDate(),
+            playerDTO.getBuyInDTO().isBuy(), player));
     return player;
   }
 }
