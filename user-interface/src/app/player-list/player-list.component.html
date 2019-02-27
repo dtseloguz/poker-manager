@@ -1,0 +1,26 @@
+<div class="player-info" *ngFor="let player of players">
+  <div class="player-info_name">
+    {{player.name}} {{player.midname}} {{player.surname}}
+  </div>
+  <div class="player-info_age">
+    {{player.age}}
+  </div>
+  <div class="payment_enable" *ngIf="player.payment">
+    <div class="player-info_payment player-info_payment-enable">
+      Взнос
+    </div> 
+    <div class="player-info_data">
+      {{player.paymentData}} /
+      {{player.paymentOffData}}
+    </div>
+  </div>
+  <div *ngIf="!player.payment">
+    <div class="player-info_payment player-info_payment-disable">
+        Взнос
+    </div> 
+    <div class="player-info_data-disable">      
+    </div>
+  </div>
+  <div class="player-change-button">    
+  </div>
+</div>
