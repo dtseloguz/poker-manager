@@ -28,6 +28,7 @@ export class PlayerListComponent implements OnInit {
     onSelect(player){
       if(player.selected === false && player.changed===false){        
         player.selected = true;
+        console.log( player.selected);
       }
       else{
         player.selected = false;
@@ -64,5 +65,8 @@ export class PlayerListComponent implements OnInit {
       player.selected =secondPlayer.selected;
       player.changed =secondPlayer.changed;
       player.payment =secondPlayer.payment;
+    }
+    deletePlayer(){
+      this.players = this.players.filter(player => player.selected != true);
     }
 }
