@@ -2,6 +2,7 @@ package com.kamarou.pokershmoker.controller;
 
 import com.kamarou.pokershmoker.dao.entity.PlayerFilter;
 import com.kamarou.pokershmoker.service.PlayerService;
+import com.kamarou.pokershmoker.service.dto.entity.CountDTO;
 import com.kamarou.pokershmoker.service.dto.entity.PlayerDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -70,4 +71,9 @@ public class PlayerController {
     return ResponseEntity.ok(playerService.selectPlayersByFilter(playerFilter, start, end));
   }
 
+  @ApiOperation(value = "Метод получения общего количества игроков в базе данных")
+  @GetMapping("/counts")
+  public ResponseEntity<CountDTO> selectPlayersCount() {
+    return ResponseEntity.ok(playerService.selectPlayersCount());
+  }
 }

@@ -5,6 +5,7 @@ import com.kamarou.pokershmoker.dao.entity.PlayerFilter;
 import com.kamarou.pokershmoker.dao.repository.PlayerRepository;
 import com.kamarou.pokershmoker.service.PlayerService;
 import com.kamarou.pokershmoker.service.dto.converter.PlayerConverter;
+import com.kamarou.pokershmoker.service.dto.entity.CountDTO;
 import com.kamarou.pokershmoker.service.dto.entity.PlayerDTO;
 import com.kamarou.pokershmoker.service.exception.InternalServerException;
 import com.kamarou.pokershmoker.service.exception.LogicException;
@@ -212,5 +213,10 @@ public class PlayerServiceImpl implements PlayerService {
     });
     uuids.forEach(playerRepository::deleteById);
     LOG.info("Delete players");
+  }
+
+  @Override
+  public CountDTO selectPlayersCount() {
+    return new CountDTO(playerRepository.findPlayersCount());
   }
 }
