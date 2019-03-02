@@ -40,6 +40,13 @@ public class PlayerServiceImpl implements PlayerService {
   private static final String NOT_VALID_END_DATE = "Дата взноса позже даты его окончания";
   private static final String DATE_FORMAT = "yyyy-MM-dd";
 
+  @Autowired
+  public PlayerServiceImpl(PlayerRepository playerRepository,
+      PlayerConverter playerConverter) {
+    this.playerRepository = playerRepository;
+    this.playerConverter = playerConverter;
+  }
+
   private List<PlayerDTO> convertToList(Collection<Player> players) {
     return players.stream()
         .map(playerConverter::convertToDTO)
@@ -98,15 +105,9 @@ public class PlayerServiceImpl implements PlayerService {
   private void validatePlayer(PlayerDTO playerDTO) {
     validateName("Имя", playerDTO.getName());
     validateName("Фамилия", playerDTO.getSurname());
-    validateName("Отчество", playerDTO.getPatronymic());
-    validateAge(playerDTO.getAge());
-  }
-
-  @Autowired
-  public PlayerServiceImpl(PlayerRepository playerRepository,
-      PlayerConverter playerConverter) {
-    this.playerRepository = playerRepository;
-    this.playerConverter = playerConverter;
+    if (playerDTO.getPatronymic() != null) {
+      validateAge(playerDTO.getAge());
+    }
   }
 
   @Transactional
