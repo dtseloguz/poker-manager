@@ -1,12 +1,12 @@
 package com.kamarou.pokershmoker.controller;
 
+import com.kamarou.pokershmoker.dao.entity.PlayerFilter;
 import com.kamarou.pokershmoker.service.PlayerService;
 import com.kamarou.pokershmoker.service.dto.entity.PlayerDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.List;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +42,7 @@ public class PlayerController {
 
   @ApiOperation(value = "Метод для получения игрока из базы данных по ID")
   @GetMapping(value = "/{uuid}")
-  public ResponseEntity<PlayerDTO> selectPlayerById(@PathVariable UUID uuid) {
+  public ResponseEntity<PlayerDTO> selectPlayerById(@PathVariable String uuid) {
     return ResponseEntity.ok(playerService.selectPlayerById(uuid));
   }
 
@@ -53,30 +53,21 @@ public class PlayerController {
   }
 
   @ApiOperation(value = "Метод для удаления игрока из базы данных")
-  @DeleteMapping(value = "/{uuid}")
-  public ResponseEntity deletePlayer(@PathVariable UUID uuid) {
-    playerService.deletePlayer(uuid);
+  @DeleteMapping
+  public ResponseEntity deletePlayer(
+      @RequestParam(name = "ids", required = true) List<String> uuids) {
+    playerService.deletePlayersById(uuids);
     return ResponseEntity.ok().build();
   }
 
   @ApiOperation(value = "Метод для получения игроков из базы данных с помощью фильтра",
       notes = "Обязательно задавать начальное и конечно значение для выборки.")
-  @GetMapping
-  public ResponseEntity<List<PlayerDTO>> selectAllPlayers(
-      @ApiParam(value =
-          "Параметр, с помощью которого можно выбрать список тех игроков, которые сделали Buy In или нет. "
-              + "Если значение параметра уставить нулевым, то метод выберет всех игрогов")
-      @RequestParam(name = "isBuy", required = false) Boolean isBuy,
+  @PostMapping(value = "/filter")
+  public ResponseEntity<List<PlayerDTO>> selectPlayersByFilter(
+      @RequestBody PlayerFilter playerFilter,
       @ApiParam(value = "Номер начальной записи") @RequestParam(name = "start") int start,
       @ApiParam(value = "Номер конечной записи") @RequestParam(name = "end") int end) {
-    List<PlayerDTO> playerDTOS;
-    if (isBuy == null) {
-      playerDTOS = playerService.selectAllPlayers(start, end);
-    } else {
-      playerDTOS = playerService.selectPlayersByIsBuy(start, end, isBuy);
-    }
-    return ResponseEntity.ok(playerDTOS);
+    return ResponseEntity.ok(playerService.selectPlayersByFilter(playerFilter, start, end));
   }
-
 
 }

@@ -1,21 +1,18 @@
 package com.kamarou.pokershmoker.service;
 
+import com.kamarou.pokershmoker.dao.entity.PlayerFilter;
 import com.kamarou.pokershmoker.service.dto.entity.PlayerDTO;
 import java.util.List;
-import java.util.UUID;
 
 public interface PlayerService {
 
   PlayerDTO savePlayer(PlayerDTO playerDTO);
 
-  List<PlayerDTO> selectAllPlayers(int start, int end);
-
-  PlayerDTO selectPlayerById(UUID id);
+  PlayerDTO selectPlayerById(String id);
 
   PlayerDTO updatePlayer(PlayerDTO playerDTO);
 
-  void deletePlayer(UUID id);
+  void deletePlayersById(List<String> uuids);
 
-  List<PlayerDTO> selectPlayersByIsBuy(int start, int end, boolean isBuy);
-
+  List<PlayerDTO> selectPlayersByFilter(PlayerFilter playerFilter, int start, int end);
 }

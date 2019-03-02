@@ -1,6 +1,7 @@
 package com.kamarou.pokershmoker.service.imp;
 
 import com.kamarou.pokershmoker.dao.entity.Player;
+import com.kamarou.pokershmoker.dao.entity.PlayerFilter;
 import com.kamarou.pokershmoker.dao.repository.PlayerRepository;
 import com.kamarou.pokershmoker.service.PlayerService;
 import com.kamarou.pokershmoker.service.dto.converter.PlayerConverter;
@@ -17,7 +18,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -46,7 +46,7 @@ public class PlayerServiceImpl implements PlayerService {
   }
 
   private boolean isBuyInExpired(Player player) {
-    if(player.getBuy().getEndDayBuy().equals("") || player.getBuy().getDateBuy().equals("")){
+    if (player.getBuy().getEndDayBuy().equals("") || player.getBuy().getDateBuy().equals("")) {
       return false;
     } else {
       Date nowDate = new Date();
@@ -54,7 +54,7 @@ public class PlayerServiceImpl implements PlayerService {
       try {
         String temp = LocalDate.parse(player.getBuy().getEndDayBuy()).plusDays(1).toString();
         endDate = new SimpleDateFormat("yyyy-MM-dd").parse(temp);
-      } catch (ParseException | DateTimeParseException e){
+      } catch (ParseException | DateTimeParseException e) {
         LOG.error("Parse date exception: {}", e);
         throw new InternalServerException("Ошибка в парсинге формата даты");
       }
@@ -63,7 +63,8 @@ public class PlayerServiceImpl implements PlayerService {
   }
 
   private void validateName(String type, String name) {
-    Pattern pattern = Pattern.compile("^([А-Я][а-я]{1,29})|([А-Я][а-я]{1,29}-[А-Я][а-я]{0,29})$");
+    Pattern pattern = Pattern
+        .compile("^([А-ЯA-Z][а-яa-z]{1,29})|([А-ЯA-Z][а-яa-z]{1,29}-[А-ЯA-Z][а-яa-z]{0,29})$");
     Matcher matcher = pattern.matcher(name);
     if (!matcher.matches()) {
       LOG.error("Not valid name: {}", name);
@@ -143,19 +144,20 @@ public class PlayerServiceImpl implements PlayerService {
 
   @Transactional
   @Override
-  public List<PlayerDTO> selectAllPlayers(int start, int end) {
+  public List<PlayerDTO> selectPlayersByFilter(PlayerFilter playerFilter, int start, int end) {
     int limit = end - start;
     if (limit < 0 || end < 0 || start < 0) {
       LOG.error("Invalid border values");
       throw new LogicException("Неверные границы выбора списка игроков");
     }
     return convertToList(
-        updatePlayerIsNeccessary(playerRepository.findPlayersByBorder(limit + 1, start)));
+        updatePlayerIsNeccessary(
+            playerRepository.findPlayersByFilter(playerFilter, start, limit + 1)));
   }
 
   @Transactional
   @Override
-  public PlayerDTO selectPlayerById(UUID id) {
+  public PlayerDTO selectPlayerById(String id) {
     LOG.debug("Find player with ID: {}", id);
     Optional<Player> optionalPlayer = playerRepository.findById(id);
     if (!optionalPlayer.isPresent()) {
@@ -176,7 +178,7 @@ public class PlayerServiceImpl implements PlayerService {
   public PlayerDTO updatePlayer(PlayerDTO playerDTO) {
     LOG.info("Validate player: {}", playerDTO);
     validatePlayer(playerDTO);
-    Optional<Player> optionalPlayer = playerRepository.findById(UUID.fromString(playerDTO.getId()));
+    Optional<Player> optionalPlayer = playerRepository.findById(playerDTO.getId());
     if (!optionalPlayer.isPresent()) {
       LOG.error("Player not found");
       throw new NotFoundException(String.format(NOT_FOUND_PLAYER, playerDTO.getId()));
@@ -200,26 +202,15 @@ public class PlayerServiceImpl implements PlayerService {
 
   @Transactional
   @Override
-  public void deletePlayer(UUID id) {
-    LOG.debug("Delete player with ID: {}", id);
-    Optional<Player> optionalPlayer = playerRepository.findById(id);
-    if (!optionalPlayer.isPresent()) {
-      LOG.error("Player not found");
-      throw new NotFoundException(String.format(NOT_FOUND_PLAYER, id));
-    }
-    playerRepository.deleteById(id);
-  }
-
-  @Transactional
-  @Override
-  public List<PlayerDTO> selectPlayersByIsBuy(int start, int end, boolean isBuy) {
-    int limit = end - start;
-    if (limit < 0) {
-      LOG.error("Invalid border values");
-      throw new LogicException("Неверные границы выбора списка игроков");
-    }
-    LOG.info("Select players buy by isBuy equals: {}", isBuy);
-    return convertToList(updatePlayerIsNeccessary(
-        playerRepository.findPlayersByBuyInIsBuy(limit + 1, start, isBuy)));
+  public void deletePlayersById(List<String> uuids) {
+    LOG.debug("Delete player with ID: {}", uuids);
+    uuids.forEach(uuid -> {
+      if (!playerRepository.findById(uuid).isPresent()) {
+        LOG.error("Player with ID {} not found.", uuid);
+        throw new NotFoundException(NOT_FOUND_PLAYER);
+      }
+    });
+    uuids.forEach(playerRepository::deleteById);
+    LOG.info("Delete players");
   }
 }

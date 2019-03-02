@@ -1,27 +1,28 @@
 package com.kamarou.pokershmoker.dao.entity;
 
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
 
 @MappedSuperclass
 public class BaseEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  protected UUID id;
+  @GenericGenerator(name = "my-uuid",
+      strategy = "com.kamarou.pokershmoker.dao.generator.CustomUUIDGenerator")
+  @GeneratedValue(generator = "my-uuid")
+  protected String id;
 
   public BaseEntity() {
   }
 
-  public UUID getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(String id) {
     this.id = id;
   }
 
