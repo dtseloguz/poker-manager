@@ -1,0 +1,98 @@
+package com.kamarou.pokershmoker.service.dto.entity;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+public class GeneralConfigDTO implements Serializable {
+
+  private String tournamentName;
+  private String tournamentDescription;
+  private double buyIn;
+  private int chipsAmount;
+  private double commission;
+
+
+  public GeneralConfigDTO() {
+  }
+
+  public GeneralConfigDTO(String tournamentName, String tournamentDescription, double buyIn,
+      int chipsAmount, double commission) {
+    this.tournamentName = tournamentName;
+    this.tournamentDescription = tournamentDescription;
+    this.buyIn = buyIn;
+    this.chipsAmount = chipsAmount;
+    this.commission = commission;
+  }
+
+  public String getTournamentName() {
+    return tournamentName;
+  }
+
+  public void setTournamentName(String tournamentName) {
+    this.tournamentName = tournamentName;
+  }
+
+  public String getTournamentDescription() {
+    return tournamentDescription;
+  }
+
+  public void setTournamentDescription(String tournamentDescription) {
+    this.tournamentDescription = tournamentDescription;
+  }
+
+  public double getBuyIn() {
+    return buyIn;
+  }
+
+  public void setBuyIn(double buyIn) {
+    this.buyIn = buyIn;
+  }
+
+  public int getChipsAmount() {
+    return chipsAmount;
+  }
+
+  public void setChipsAmount(int chipsAmount) {
+    this.chipsAmount = chipsAmount;
+  }
+
+  public double getCommission() {
+    return commission;
+  }
+
+  public void setCommission(double commission) {
+    this.commission = commission;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    GeneralConfigDTO that = (GeneralConfigDTO) o;
+    return Double.compare(that.buyIn, buyIn) == 0 &&
+        chipsAmount == that.chipsAmount &&
+        Double.compare(that.commission, commission) == 0 &&
+        Objects.equals(tournamentName, that.tournamentName) &&
+        Objects.equals(tournamentDescription, that.tournamentDescription);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(tournamentName, tournamentDescription, buyIn, chipsAmount, commission);
+  }
+
+  @Override
+  public String toString() {
+    return "GeneralConfigDTO{" +
+        "tournamentName='" + tournamentName + '\'' +
+        ", tournamentDescription='" + tournamentDescription + '\'' +
+        ", buyIn=" + buyIn +
+        ", chipsAmount=" + chipsAmount +
+        ", commission=" + commission +
+        '}';
+  }
+}
