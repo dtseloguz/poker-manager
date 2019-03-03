@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GeneralConfigConverter implements Converter<GeneralConfigDTO, GeneralConfig> {
+
   @Override
   public GeneralConfigDTO convertToDTO(GeneralConfig config) {
-    return new GeneralConfigDTO(config.getTournamentName(), config.getDescription(),
+    return new GeneralConfigDTO(config.getId(), config.getTournamentName(), config.getDescription(),
         config.getBuyIn(), config.getChipsAmount(), config.getCommission());
   }
 

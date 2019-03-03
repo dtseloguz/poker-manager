@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class OtherConfigDTO implements Serializable {
 
+  private String id;
   private GameConfigType gameConfigType;
   private int chipsAmount;
   private double commission;
@@ -14,12 +15,22 @@ public class OtherConfigDTO implements Serializable {
   public OtherConfigDTO() {
   }
 
-  public OtherConfigDTO(GameConfigType gameConfigType, int chipsAmount, double commission,
+  public OtherConfigDTO(String id, GameConfigType gameConfigType, int chipsAmount,
+      double commission,
       boolean configPresent) {
+    this.id = id;
     this.gameConfigType = gameConfigType;
     this.chipsAmount = chipsAmount;
     this.commission = commission;
     this.configPresent = configPresent;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public GameConfigType getGameConfigType() {

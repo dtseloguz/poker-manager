@@ -1,4 +1,4 @@
-package com.kamarou.pokershmoker.service.imp;
+package com.kamarou.pokershmoker.service.impl;
 
 import com.kamarou.pokershmoker.dao.entity.GeneralConfig;
 import com.kamarou.pokershmoker.dao.repository.GeneralConfigRepository;
@@ -9,6 +9,7 @@ import com.kamarou.pokershmoker.service.exception.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class GeneralConfigServiceImpl implements GeneralConfigService {
         .collect(Collectors.toList());
   }
 
+  @Transactional
   @Override
   public GeneralConfigDTO saveGeneralConfig(GeneralConfigDTO configDTO) {
     LOG.info("Save general config");
@@ -44,11 +46,22 @@ public class GeneralConfigServiceImpl implements GeneralConfigService {
     return configConverter.convertToDTO(generalConfig);
   }
 
+  @Transactional
   @Override
   public GeneralConfigDTO updateGeneralConfig(GeneralConfigDTO configDTO) {
     LOG.info("Update general config");
-    GeneralConfig generalConfig = configConverter.convertToEntity(configDTO);
-    return configConverter.convertToDTO(generalConfig);
+    Optional<GeneralConfig> optionalConfig = configRepository.findById(configDTO.getId());
+    if (!optionalConfig.isPresent()) {
+      LOG.error("Config with ID {} not found", configDTO.getId());
+      throw new NotFoundException(NOT_FOUND_CONFIG);
+    }
+    GeneralConfig generalConfig = optionalConfig.get();
+    generalConfig.setBuyIn(configDTO.getBuyIn());
+    generalConfig.setDescription(configDTO.getTournamentDescription());
+    generalConfig.setTournamentName(configDTO.getTournamentName());
+    generalConfig.setChipsAmount(configDTO.getChipsAmount());
+    generalConfig.setCommission(configDTO.getCommission());
+    return configConverter.convertToDTO(configRepository.save(generalConfig));
   }
 
   @Override
@@ -62,6 +75,7 @@ public class GeneralConfigServiceImpl implements GeneralConfigService {
     return configConverter.convertToDTO(optionalConfig.get());
   }
 
+  @Transactional
   @Override
   public void deleteGeneralConfig(String id) {
     LOG.info("Delete general config by id: {}", id);

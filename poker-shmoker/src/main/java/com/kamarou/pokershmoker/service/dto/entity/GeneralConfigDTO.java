@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class GeneralConfigDTO implements Serializable {
 
+  private String id;
   private String tournamentName;
   private String tournamentDescription;
   private double buyIn;
@@ -15,13 +16,22 @@ public class GeneralConfigDTO implements Serializable {
   public GeneralConfigDTO() {
   }
 
-  public GeneralConfigDTO(String tournamentName, String tournamentDescription, double buyIn,
+  public GeneralConfigDTO(String id, String tournamentName, String tournamentDescription, double buyIn,
       int chipsAmount, double commission) {
+    this.id = id;
     this.tournamentName = tournamentName;
     this.tournamentDescription = tournamentDescription;
     this.buyIn = buyIn;
     this.chipsAmount = chipsAmount;
     this.commission = commission;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public String getTournamentName() {
@@ -88,7 +98,8 @@ public class GeneralConfigDTO implements Serializable {
   @Override
   public String toString() {
     return "GeneralConfigDTO{" +
-        "tournamentName='" + tournamentName + '\'' +
+        "id='" + id + '\'' +
+        ", tournamentName='" + tournamentName + '\'' +
         ", tournamentDescription='" + tournamentDescription + '\'' +
         ", buyIn=" + buyIn +
         ", chipsAmount=" + chipsAmount +

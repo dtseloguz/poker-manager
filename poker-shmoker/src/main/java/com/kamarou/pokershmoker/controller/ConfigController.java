@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/poker-shmoker/configs")
+@RequestMapping(value = "/poker-shmoker/configs/general")
 public class ConfigController {
 
   private final GeneralConfigService generalConfigService;
@@ -26,32 +26,32 @@ public class ConfigController {
     this.generalConfigService = generalConfigService;
   }
 
-  @PostMapping(value = "/general")
+  @PostMapping
   public ResponseEntity<GeneralConfigDTO> saveGeneralConfig(
       @RequestBody GeneralConfigDTO generalConfigDTO) {
     return ResponseEntity.status(HttpStatus.CREATED)
         .body(generalConfigService.saveGeneralConfig(generalConfigDTO));
   }
 
-  @PutMapping(value = "/general")
+  @PutMapping
   public ResponseEntity<GeneralConfigDTO> updateGeneralConfig(
       @RequestBody GeneralConfigDTO generalConfigDTO) {
     return ResponseEntity.ok()
         .body(generalConfigService.updateGeneralConfig(generalConfigDTO));
   }
 
-  @GetMapping(value = "/general/{generalConfigID}")
+  @GetMapping(value = "/{generalConfigID}")
   public ResponseEntity<GeneralConfigDTO> selectGeneralConfig(
       @PathVariable String generalConfigID) {
     return ResponseEntity.ok(generalConfigService.selectGeneralConfigById(generalConfigID));
   }
 
-  @GetMapping(value = "/general")
+  @GetMapping
   public ResponseEntity<List<GeneralConfigDTO>> selectAllGeneralConfig() {
     return ResponseEntity.ok(generalConfigService.selectAllConfigs());
   }
 
-  @DeleteMapping(value = "/general/{generalConfigID}")
+  @DeleteMapping(value = "/{generalConfigID}")
   public ResponseEntity<GeneralConfigDTO> deleteGeneralConfig(
       @PathVariable String generalConfigID) {
     generalConfigService.deleteGeneralConfig(generalConfigID);

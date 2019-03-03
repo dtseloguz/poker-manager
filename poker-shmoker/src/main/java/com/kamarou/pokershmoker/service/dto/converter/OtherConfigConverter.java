@@ -10,7 +10,7 @@ public class OtherConfigConverter implements Converter<OtherConfigDTO, OtherConf
 
   @Override
   public OtherConfigDTO convertToDTO(OtherConfig entity) {
-    return new OtherConfigDTO(entity.getGameConfigType(), entity.getChipsAmount(),
+    return new OtherConfigDTO(entity.getId(), entity.getGameConfigType(), entity.getChipsAmount(),
         entity.getCommission(), entity.isConfigPresent());
   }
 
