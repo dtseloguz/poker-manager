@@ -1,0 +1,13 @@
+.pre-uncheck::before{
+    content: url(game-settings-uncheck.svg);
+}
+.pre-check::before{
+    content: url(game-settings-check.svg);
+}
+
+.pre-export::before{
+    content: url(../app-export-pre-button.svg);
+}
+.pre-import::before{
+    content: url(../app-import-pre-button.svg);
+}
