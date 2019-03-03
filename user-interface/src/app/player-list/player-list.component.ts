@@ -39,7 +39,6 @@ export class PlayerListComponent implements OnInit {
        player.changed = true;
        this.copyProperty(this.selectedPlayer,player);
        console.log(this.selectedPlayer);
-       
        this.checkSelectedPlayer = true;
       }
       else if(player.changed === true) {
