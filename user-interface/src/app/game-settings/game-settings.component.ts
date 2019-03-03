@@ -18,4 +18,14 @@ export class GameSettingsComponent implements OnInit {
   load(): void{
     this.tournamentInfo = TOURNAMENTSETTING ;
   }
+  changeA(){
+    console.log("Addon");
+    if(this.tournamentInfo.AddOnBut === true) this.tournamentInfo.AddOnBut=false;
+    else this.tournamentInfo.AddOnBut = true;
+  }
+  changeR(){
+    console.log("Rebuy");
+    if(this.tournamentInfo.rebuyBut === true) this.tournamentInfo.rebuyBut=false;
+    else this.tournamentInfo.rebuyBut = true;
+  }
 }
