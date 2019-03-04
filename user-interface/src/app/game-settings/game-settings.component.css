@@ -1,0 +1,143 @@
+.game-component{
+    padding-top: 14px;
+    padding-left: 30px;
+}
+
+h2{
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 18px;
+    color: #202124;
+    border-top: 1px solid #DADCDD;
+    border-bottom: 1px solid#DADCDD;
+    height: 54px;
+    margin-top: 13px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.pre-uncheck::before{
+    content: url(game-settings-uncheck.svg);
+}
+.pre-check::before{
+    content: url(game-settings-check.svg);
+}
+
+.pre-export::before{
+    content: url(../app-export-pre-button.svg);
+}
+.pre-import::before{
+    content: url(../app-import-pre-button.svg);
+}
+.pre-uncheck::before,.pre-check::before,.pre-export::before,.pre-import::before{
+    padding-right: 10px;
+}
+
+.setting .but-check::before{
+    content: url(game-settings-check.svg);
+    padding-right: 10px;
+}
+
+.showON .but-check::before{
+    content: url(game-settings-uncheck.svg);    
+    padding-right: 10px;
+}
+.showON textarea{
+    pointer-events: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
+}
+.showON{
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 14px;
+    
+    opacity: 0.5;
+    color: rgba(32,33,36,1);
+}
+.showON div .but-check{
+    opacity: 1!important;
+    color: rgba(32,33,36,1);
+    z-index: 2;
+    
+}
+.but-check{
+    margin-top: 5px;
+}
+.button{
+    width: 100%;
+    border-top: 1px solid #DADCDD;
+    border-bottom: 1px solid #DADCDD;
+    margin-top: 40px;
+    height: 52px;
+}
+.but-check::-webkit-keygen-select{
+    border: none!important;
+}
+.but-check{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 18px;
+
+    color: #202124;
+}
+button{
+    border:none;
+    background: #fff;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    color: #576066;
+    width: 140px;
+    height: 40px;
+}
+
+.btn-start{
+    background: #5DC366;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.border{
+    height: 30px;
+    width: 1px;
+    background: #C4C4C4;
+    opacity: 0.5;
+    margin: 6px 18px 0 18px;
+    content: "";
+}
+.input-group-prepend{
+    position: relative;
+    width:110px;
+
+}
+.input-group-text{
+    background: #fff;
+    border: none;
+    display: inline-block;
+    padding-top: 7px;
+    margin-top: 20px;
+}
+textarea{
+    background: #FFFFFF;
+    border: 1px solid #C3C3C3;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
+    border-radius: 3px!important;
+    resize: none;
+    margin-top: 20px;
+    height: 44px;
+    width: 22%!important;
+}
+.general-tournament-settings,.buy-in-settings {
+    width:375px;
+    margin-right: 80px;
+}
