@@ -1,0 +1,64 @@
+<div class="rounds-body">
+  <div class="rounds-menu">
+    <div class="rounds-buttons">
+      <button class="rounds-menu_button">
+        Добавить
+      </button>
+      <div class="border"></div>
+      <div >
+        <button class="rounds-menu_button" >
+          Удалить
+        </button>
+      </div>
+      <div class="border"></div>
+      <button class="rounds-menu_button">
+        Импорт
+      </button>
+      <div class="border"></div>
+      <button class="rounds-menu_button">
+        Экспорт
+      </button>
+    </div>  
+  </div>
+  <div class="navigation d-flex row justify-content-around">
+    <div class="col-1">Раунд</div>
+    <div class="col-1">Название игры</div>
+    <div class="col-1">Тип игры</div>
+    <div class="col-1">Длительность</div>
+    <div class="col-1 d-flex justify-content-center">Small Blind</div>
+    <div class="col-1">Big Bland</div>
+    <div class="col-1">Ante</div>
+    <div class="col-1">Начало</div>
+    <div class="col-1">Chip-up</div>    
+  </div>
+  <div class="d-flex justify-content-between" *ngFor="let round of tournamentInfo.tournamentSet.rounds">
+    <div class="col-1"> 
+        <div *ngIf="round.levelType">
+          Раунд {{round.levelNumber}}
+        </div>
+        <div  *ngIf="!round.levelType">
+            Перерыв {{round.levelNumber}}
+        </div>
+    </div>
+    <div class="col-1">
+      <div *ngIf="round.levelType">{{round.gameName}}</div>
+    </div>
+    <div class="col-1">
+        <div *ngIf="round.levelType">{{round.gameType}}</div>
+    </div>
+    <div class="col-1">{{round.duration}}</div>
+    <div class="col-1 d-flex justify-content-center">
+        <div *ngIf="round.levelType">{{round.smallBlind}}</div>
+    </div>    
+    <div class="col-1">
+      <div *ngIf="round.levelType">{{round.bigBlind}}</div>
+    </div>
+    <div class="col-1">
+      <div *ngIf="round.levelType">{{round.ante}}</div>
+    </div>
+    <div class="col-1">{{round.startTime}}</div>
+    <div class="col-1">
+      <div *ngIf="round.chipUp">Chip Up</div>
+    </div>    
+  </div>
+</div>

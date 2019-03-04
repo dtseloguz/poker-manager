@@ -1,4 +1,5 @@
-import { TournamentSetting } from '../tournament-setting';
+import { TournamentSetting } from './tournament-setting';
+import {Round} from './round';
 
 export class TournamentSettingFull{
     constructor(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {TournamentSettingFull} from './tournament-setting-full';
-import { TOURNAMENTSETTING } from './mock-tournament'
+import {TournamentSettingFull} from '../tournament-setting-full';
+import { TOURNAMENTSETTING } from '../mock-tournament';
+
 @Component({
   selector: 'app-game-settings',
   templateUrl: './game-settings.component.html',

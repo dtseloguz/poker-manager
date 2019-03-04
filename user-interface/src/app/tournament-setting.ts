@@ -1,4 +1,5 @@
 import { InfoPayment } from './infoPayment';
+import {Round} from './round';
 
 export class TournamentSetting{
     constructor(){
@@ -8,6 +9,7 @@ export class TournamentSetting{
         this.addOn = new InfoPayment();
         this.reBuy = new InfoPayment();
     }
+    rounds: Round[];
     name: string;
     discription: string;
     buyIn : InfoPayment;

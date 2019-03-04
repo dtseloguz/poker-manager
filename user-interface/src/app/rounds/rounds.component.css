@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=cyrillic,cyrillic-ext');
+.rounds-body{
+    margin-top: 15px;
+    width: 100%;
+}
+.rounds-menu{
+    display: flex;
+    margin-bottom: 12px;
+}
+.rounds-buttons{
+    display: flex;
+}
+.border{
+    height: 30px;
+    width: 1px;
+    background: #C4C4C4;
+    opacity: 0.5;
+    margin: 6px 18px 0 18px;
+    content: "";
+}
+.rounds-menu_button{
+    width:100px;
+    height: 40px;
+    background: #fff;
+    border:none;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 14px;
+    color: #576066;
+    font-family: 'Roboto', sans-serif;
+}
+.rounds-menu_button:hover{
+    color: #202124;
+}
+.line{
+    border: 1px solid #DADCDD;
+    border-bottom: none;
+}
+.navigation{
+    height: 60px;
+    width:100%;
+    padding: 20px 0;
+    border-top: 1px solid #DADCDD;
+    border-bottom: 1px solid #DADCDD;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #576066;
+}
+.navigation div{
+    height: 20px;
+}
+.player-info,.payment_enable{
+    display: flex;
+}

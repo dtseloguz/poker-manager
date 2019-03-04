@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { FormsModule } from '@angular/forms';
 import { GameSettingsComponent } from './game-settings/game-settings.component';
+import { RoundsComponent } from './rounds/rounds.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerListComponent,
-    GameSettingsComponent
+    GameSettingsComponent,
+    RoundsComponent
   ],
   imports: [
     BrowserModule,
