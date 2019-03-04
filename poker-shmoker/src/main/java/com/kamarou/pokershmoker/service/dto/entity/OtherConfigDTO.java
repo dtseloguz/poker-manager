@@ -11,18 +11,28 @@ public class OtherConfigDTO implements Serializable {
   private int chipsAmount;
   private double commission;
   private boolean configPresent;
+  private String tournamentID;
 
   public OtherConfigDTO() {
   }
 
   public OtherConfigDTO(String id, GameConfigType gameConfigType, int chipsAmount,
       double commission,
-      boolean configPresent) {
+      boolean configPresent, String tournamentID) {
     this.id = id;
     this.gameConfigType = gameConfigType;
     this.chipsAmount = chipsAmount;
     this.commission = commission;
     this.configPresent = configPresent;
+    this.tournamentID = tournamentID;
+  }
+
+  public String getTournamentID() {
+    return tournamentID;
+  }
+
+  public void setTournamentID(String tournamentID) {
+    this.tournamentID = tournamentID;
   }
 
   public String getId() {
@@ -77,21 +87,25 @@ public class OtherConfigDTO implements Serializable {
     return chipsAmount == that.chipsAmount &&
         Double.compare(that.commission, commission) == 0 &&
         configPresent == that.configPresent &&
-        gameConfigType == that.gameConfigType;
+        Objects.equals(id, that.id) &&
+        gameConfigType == that.gameConfigType &&
+        Objects.equals(tournamentID, that.tournamentID);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(gameConfigType, chipsAmount, commission, configPresent);
+    return Objects.hash(id, gameConfigType, chipsAmount, commission, configPresent, tournamentID);
   }
 
   @Override
   public String toString() {
-    return "OtherConfigConverter{" +
-        "gameConfigType=" + gameConfigType +
+    return "OtherConfigDTO{" +
+        "id='" + id + '\'' +
+        ", gameConfigType=" + gameConfigType +
         ", chipsAmount=" + chipsAmount +
         ", commission=" + commission +
         ", configPresent=" + configPresent +
+        ", tournamentID='" + tournamentID + '\'' +
         '}';
   }
 }

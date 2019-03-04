@@ -1,13 +1,16 @@
 package com.kamarou.pokershmoker.dao.entity;
 
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 
 @Entity
-@Table
+@Table(name = "generalConfig")
 @Proxy(lazy = false)
 public class GeneralConfig extends Game {
 
@@ -20,24 +23,38 @@ public class GeneralConfig extends Game {
   @Column
   private double buyIn;
 
+  @OneToOne(mappedBy = "generalConfig", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Tournament tournament;
 
   public GeneralConfig() {
   }
 
-  public GeneralConfig(String tournamentName, String description, double buyIn) {
-    this.tournamentName = tournamentName;
-    this.description = description;
-    this.buyIn = buyIn;
-  }
-
   public GeneralConfig(double commission, int chipsAmount, String tournamentName,
-      String description, double buyIn) {
+      String description, double buyIn, Tournament tournament) {
     super(commission, chipsAmount);
     this.tournamentName = tournamentName;
     this.description = description;
     this.buyIn = buyIn;
+    this.tournament = tournament;
   }
 
+
+  public GeneralConfig(String tournamentName, String description, double buyIn,
+      Tournament tournament) {
+    this.tournamentName = tournamentName;
+    this.description = description;
+    this.buyIn = buyIn;
+    this.tournament = tournament;
+  }
+
+
+  public Tournament getTournament() {
+    return tournament;
+  }
+
+  public void setTournament(Tournament tournament) {
+    this.tournament = tournament;
+  }
 
   public String getTournamentName() {
     return tournamentName;
@@ -77,14 +94,14 @@ public class GeneralConfig extends Game {
     GeneralConfig that = (GeneralConfig) o;
     return Double.compare(that.buyIn, buyIn) == 0 &&
         Objects.equals(tournamentName, that.tournamentName) &&
-        Objects.equals(description, that.description);
+        Objects.equals(description, that.description) &&
+        Objects.equals(tournament, that.tournament);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), tournamentName, description, buyIn);
+    return Objects.hash(super.hashCode(), tournamentName, description, buyIn, tournament);
   }
-
 
   @Override
   public String toString() {

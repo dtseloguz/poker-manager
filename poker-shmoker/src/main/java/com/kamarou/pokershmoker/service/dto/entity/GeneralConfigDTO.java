@@ -11,19 +11,28 @@ public class GeneralConfigDTO implements Serializable {
   private double buyIn;
   private int chipsAmount;
   private double commission;
-
+  private String tournamentID;
 
   public GeneralConfigDTO() {
   }
 
-  public GeneralConfigDTO(String id, String tournamentName, String tournamentDescription, double buyIn,
-      int chipsAmount, double commission) {
+  public GeneralConfigDTO(String id, String tournamentName, String tournamentDescription,
+      double buyIn, int chipsAmount, double commission, String tournamentID) {
     this.id = id;
     this.tournamentName = tournamentName;
     this.tournamentDescription = tournamentDescription;
     this.buyIn = buyIn;
     this.chipsAmount = chipsAmount;
     this.commission = commission;
+    this.tournamentID = tournamentID;
+  }
+
+  public String getTournamentID() {
+    return tournamentID;
+  }
+
+  public void setTournamentID(String tournamentID) {
+    this.tournamentID = tournamentID;
   }
 
   public String getId() {
@@ -86,13 +95,16 @@ public class GeneralConfigDTO implements Serializable {
     return Double.compare(that.buyIn, buyIn) == 0 &&
         chipsAmount == that.chipsAmount &&
         Double.compare(that.commission, commission) == 0 &&
+        Objects.equals(id, that.id) &&
         Objects.equals(tournamentName, that.tournamentName) &&
-        Objects.equals(tournamentDescription, that.tournamentDescription);
+        Objects.equals(tournamentDescription, that.tournamentDescription) &&
+        Objects.equals(tournamentID, that.tournamentID);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tournamentName, tournamentDescription, buyIn, chipsAmount, commission);
+    return Objects.hash(id, tournamentName, tournamentDescription, buyIn, chipsAmount, commission,
+        tournamentID);
   }
 
   @Override
@@ -104,6 +116,7 @@ public class GeneralConfigDTO implements Serializable {
         ", buyIn=" + buyIn +
         ", chipsAmount=" + chipsAmount +
         ", commission=" + commission +
+        ", tournamentID='" + tournamentID + '\'' +
         '}';
   }
 }

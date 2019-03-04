@@ -1,15 +1,18 @@
 package com.kamarou.pokershmoker.dao.entity;
 
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Proxy;
 
 @Entity
-@Table
+@Table(name = "otherConfig")
 @Proxy(lazy = false)
 public class OtherConfig extends Game {
 
@@ -19,6 +22,9 @@ public class OtherConfig extends Game {
 
   @Column
   private boolean configPresent;
+
+  @OneToOne(mappedBy = "otherConfig", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Tournament tournament;
 
   public OtherConfig() {
   }
@@ -35,20 +41,16 @@ public class OtherConfig extends Game {
     this.configPresent = configPresent;
   }
 
+  public Tournament getTournament() {
+    return tournament;
+  }
+
+  public void setTournament(Tournament tournament) {
+    this.tournament = tournament;
+  }
+
   public GameConfigType getGameConfigType() {
     return gameConfigType;
-  }
-
-  public void setGameConfigType(GameConfigType gameConfigType) {
-    this.gameConfigType = gameConfigType;
-  }
-
-  public boolean isConfigPresent() {
-    return configPresent;
-  }
-
-  public void setConfigPresent(boolean configPresent) {
-    this.configPresent = configPresent;
   }
 
   @Override
@@ -68,11 +70,6 @@ public class OtherConfig extends Game {
   }
 
   @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), gameConfigType, configPresent);
-  }
-
-  @Override
   public String toString() {
     return "OtherConfig{" +
         "gameConfigType=" + gameConfigType +
@@ -82,4 +79,22 @@ public class OtherConfig extends Game {
         ", id='" + id + '\'' +
         '}';
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), gameConfigType, configPresent);
+  }
+
+  public void setGameConfigType(GameConfigType gameConfigType) {
+    this.gameConfigType = gameConfigType;
+  }
+
+  public boolean isConfigPresent() {
+    return configPresent;
+  }
+
+  public void setConfigPresent(boolean configPresent) {
+    this.configPresent = configPresent;
+  }
+
 }

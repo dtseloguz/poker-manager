@@ -12,7 +12,7 @@ public class RoundConverter implements Converter<RoundDTO, Round> {
   public RoundDTO convertToDTO(Round e) {
     return new RoundDTO(e.getId(), e.getPosition(), e.getNumber(), e.getDuration(), e.getTimeLeft(),
         e.isChipUp(), e.getGameName(), e.getGameType(), e.getSmallBlind(), e.getBigBlind(),
-        e.getAnte(), e.getRoundType());
+        e.getAnte(), e.getRoundType(), e.getTournament().getId());
   }
 
   @Override

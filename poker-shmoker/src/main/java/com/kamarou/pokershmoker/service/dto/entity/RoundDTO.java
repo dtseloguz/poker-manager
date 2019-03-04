@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class RoundDTO implements Serializable {
+
   private String id;
   private int position;
   private int number;
@@ -19,13 +20,14 @@ public class RoundDTO implements Serializable {
   private double bigBlind;
   private double ante;
   private RoundType roundType;
+  private String tournamentID;
 
   public RoundDTO() {
   }
 
   public RoundDTO(String id, int position, int number, int duration, int timeLeft, boolean chipUp,
       GameName gameName, GameType gameType, double smallBlind, double bigBlind, double ante,
-      RoundType roundType) {
+      RoundType roundType, String tournamentID) {
     this.id = id;
     this.position = position;
     this.number = number;
@@ -38,6 +40,15 @@ public class RoundDTO implements Serializable {
     this.bigBlind = bigBlind;
     this.ante = ante;
     this.roundType = roundType;
+    this.tournamentID = tournamentID;
+  }
+
+  public String getTournamentID() {
+    return tournamentID;
+  }
+
+  public void setTournamentID(String tournamentID) {
+    this.tournamentID = tournamentID;
   }
 
   public String getId() {
@@ -156,14 +167,15 @@ public class RoundDTO implements Serializable {
         Objects.equals(id, roundDTO.id) &&
         gameName == roundDTO.gameName &&
         gameType == roundDTO.gameType &&
-        roundType == roundDTO.roundType;
+        roundType == roundDTO.roundType &&
+        Objects.equals(tournamentID, roundDTO.tournamentID);
   }
 
   @Override
   public int hashCode() {
     return Objects
         .hash(id, position, number, duration, timeLeft, chipUp, gameName, gameType, smallBlind,
-            bigBlind, ante, roundType);
+            bigBlind, ante, roundType, tournamentID);
   }
 
   @Override
@@ -181,6 +193,7 @@ public class RoundDTO implements Serializable {
         ", bigBlind=" + bigBlind +
         ", ante=" + ante +
         ", roundType=" + roundType +
+        ", tournamentID='" + tournamentID + '\'' +
         '}';
   }
 }
