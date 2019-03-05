@@ -5,7 +5,7 @@ import {GameSettingsComponent} from './game-settings/game-settings.component';
 import {RoundsComponent} from './rounds/rounds.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/rounds', pathMatch: 'full' },
+  { path: '', redirectTo: '/data-base', pathMatch: 'full' },
   { path: 'data-base', component: PlayerListComponent },
   {path: "game-settings", component:GameSettingsComponent},
   {path: "rounds", component:RoundsComponent},

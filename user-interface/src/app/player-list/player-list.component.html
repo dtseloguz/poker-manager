@@ -1,7 +1,7 @@
 <div class="data-base-body">
   <div class="data-base-menu">
     <div class="data-base-menu-buttons">
-      <button class="data-base-menu_button">
+      <button (click)="addPlayer()" class="data-base-menu_button">
         Добавить
       </button>
       <div class="border"></div>
@@ -67,9 +67,9 @@
             <label for="checkBox">Взнос</label>
         </div>
         <div class="player-info_data-change" *ngIf="player.changed">
-            <input  [(ngModel)]="player.paymentData" placeholder="Имя">
+            <input  [(ngModel)]="player.paymentData" placeholder="Взнос">
             /
-            <input  [(ngModel)]="player.paymentOffData" placeholder="Фамилия">
+            <input  [(ngModel)]="player.paymentOffData" placeholder="Окончание">
         </div>
         <div>
             <button (click)="onChange(player)">Change</button>

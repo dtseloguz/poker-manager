@@ -1,14 +1,14 @@
 export class Player{
     constructor(){
-        name: "";
-        surname: "";
-        midname: "";
-        age: 0;
-        payment : false;
-        paymentData: "";
-        paymentOffData: "";
-        selected: false;
-        changed: false; 
+        this.name= "";
+        this.surname= "";
+        this.midname= "";
+        this. age= 0;
+        this.payment = false;
+        this.paymentData="";
+        this.paymentOffData= "";
+        this.selected= false;
+        this.changed=true; 
     }
     name: string;
     surname: string;

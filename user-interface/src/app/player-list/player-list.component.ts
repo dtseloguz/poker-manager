@@ -34,6 +34,12 @@ export class PlayerListComponent implements OnInit {
         player.selected = false;
       }
     }
+    addPlayer(){
+      if(this.checkSelectedPlayer === false){
+      this.checkSelectedPlayer = true;
+      this.players.unshift(new Player());
+      }
+    }
     onChange(player){
       if(player.changed === false &&  (this.checkSelectedPlayer === false)){
        player.changed = true;
