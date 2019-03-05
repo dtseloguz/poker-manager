@@ -55,6 +55,6 @@ public class ConfigController {
   public ResponseEntity<GeneralConfigDTO> deleteGeneralConfig(
       @PathVariable String generalConfigID) {
     generalConfigService.deleteGeneralConfig(generalConfigID);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 }

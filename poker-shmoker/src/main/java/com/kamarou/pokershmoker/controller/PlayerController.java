@@ -58,7 +58,7 @@ public class PlayerController {
   public ResponseEntity deletePlayer(
       @RequestParam(name = "ids", required = true) List<String> uuids) {
     playerService.deletePlayersById(uuids);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
   @ApiOperation(value = "Метод для получения игроков из базы данных с помощью фильтра",
