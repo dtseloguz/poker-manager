@@ -9,4 +9,5 @@ export class Round{
     bigBlind: number;
     startTime: string;
     chipUp: boolean;
+    active: boolean;
 }

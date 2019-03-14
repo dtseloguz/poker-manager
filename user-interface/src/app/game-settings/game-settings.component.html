@@ -10,91 +10,93 @@
   <h2>
     Общее
   </h2>
-  <div class="general-setting d-flex">
-    <div class="general-tournament-settings ">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Название</span>
+  <div class="settings ">
+    <div class="general-setting d-flex ">
+      <div class="general-tournament-settings ">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Название</span>
+          </div>
+          <textarea [(ngModel)]="tournamentInfo.tournamentSet.name" class="form-control row-3" aria-label="With textarea" placeholder="Название турнира"></textarea>
         </div>
-        <textarea [(ngModel)]="tournamentInfo.tournamentSet.name" class="form-control row-3" aria-label="With textarea" placeholder="Название турнира"></textarea>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Описание</span>
+          </div>
+          <textarea [(ngModel)]="tournamentInfo.tournamentSet.discription" class="form-control" aria-label="With textarea" placeholder="Описание"></textarea>
+        </div>
       </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Описание</span>
+      <div class="buy-in-settings ">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Старт</span>
+          </div>
+          <textarea [(ngModel)]="tournamentInfo.tournamentSet.buyIn.stack" class="form-control" aria-label="With textarea"></textarea>
         </div>
-        <textarea [(ngModel)]="tournamentInfo.tournamentSet.discription" class="form-control" aria-label="With textarea" placeholder="Описание"></textarea>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Коммисия</span>
+          </div>
+          <textarea [(ngModel)]="tournamentInfo.tournamentSet.buyIn.rake" class="form-control" aria-label="With textarea"></textarea>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Buy-in</span>
+          </div>
+          <textarea [(ngModel)]="tournamentInfo.tournamentSet.buyIn.buyIn" class="form-control" aria-label="With textarea"></textarea>
+        </div>
       </div>
     </div>
-    <div class="buy-in-settings ">
-      <div class="input-group">
+    <div [class.showON]="tournamentInfo.rebuyBut === false" 
+    class="re-buy-setting  setting d-flex row col-12 flex-column" >
+      <div class="button">
+          <button class="but-check" (click)="changeR()">Re-buy</button>
+      </div>    
+      <div class="input-group col-3">
         <div class="input-group-prepend">
-          <span class="input-group-text">Старт</span>
+          <span class="input-group-text">Сумма</span>
         </div>
-        <textarea [(ngModel)]="tournamentInfo.tournamentSet.buyIn.stack" class="form-control" aria-label="With textarea"></textarea>
+        <textarea [(ngModel)]="tournamentInfo.tournamentSet.reBuy.buyIn" class="form-control" aria-label="With textarea"></textarea>
       </div>
-      <div class="input-group">
+      <div class="input-group col-3">
         <div class="input-group-prepend">
           <span class="input-group-text">Коммисия</span>
         </div>
-        <textarea [(ngModel)]="tournamentInfo.tournamentSet.buyIn.rake" class="form-control" aria-label="With textarea"></textarea>
+        <textarea [(ngModel)]="tournamentInfo.tournamentSet.reBuy.rake" class="form-control" aria-label="With textarea"></textarea>
       </div>
-      <div class="input-group">
+      <div class="input-group col-3">
         <div class="input-group-prepend">
-          <span class="input-group-text">Buy-in</span>
+          <span class="input-group-text">Стек</span>
         </div>
-        <textarea [(ngModel)]="tournamentInfo.tournamentSet.buyIn.buyIn" class="form-control" aria-label="With textarea"></textarea>
+        <textarea [(ngModel)]="tournamentInfo.tournamentSet.reBuy.stack" class="form-control" aria-label="With textarea"></textarea>
       </div>
     </div>
-  </div>
-  <div [class.showON]="tournamentInfo.rebuyBut === false" 
-  class="re-buy-setting  setting d-flex row col-6" >
+    <div [class.showON]="tournamentInfo.AddOnBut === false" 
+    class="addon-setting setting d-flex row col-12 flex-column" >
     <div class="button">
-        <button class="but-check" (click)="changeR()">Re-buy</button>
-    </div>    
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Сумма</span>
-      </div>
-      <textarea [(ngModel)]="tournamentInfo.tournamentSet.reBuy.buyIn" class="form-control" aria-label="With textarea"></textarea>
+        <button class="but-check" (click)="changeA()">Add-ons</button>
     </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Коммисия</span>
+      
+      <div class="input-group col-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Сумма</span>
+        </div>
+        <textarea [(ngModel)]="tournamentInfo.tournamentSet.addOn.buyIn" 
+        class="form-control" aria-label="With textarea"></textarea>
       </div>
-      <textarea [(ngModel)]="tournamentInfo.tournamentSet.reBuy.rake" class="form-control" aria-label="With textarea"></textarea>
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Стек</span>
+      <div class="input-group col-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Коммисия</span>
+        </div>
+        <textarea [(ngModel)]="tournamentInfo.tournamentSet.addOn.rake"
+        class="form-control" aria-label="With textarea"></textarea>
       </div>
-      <textarea [(ngModel)]="tournamentInfo.tournamentSet.reBuy.stack" class="form-control" aria-label="With textarea"></textarea>
-    </div>
-  </div>
-  <div [class.showON]="tournamentInfo.AddOnBut === false" 
-  class="addon-setting setting d-flex row col-6" >
-  <div class="button">
-      <button class="but-check" (click)="changeA()">Add-ons</button>
-  </div>
-    
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Сумма</span>
+      <div class="input-group col-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Стек</span>
+        </div>
+        <textarea [(ngModel)]="tournamentInfo.tournamentSet.addOn.stack" class="form-control" aria-label="With textarea"></textarea>
       </div>
-      <textarea [(ngModel)]="tournamentInfo.tournamentSet.addOn.buyIn" 
-      class="form-control" aria-label="With textarea"></textarea>
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Коммисия</span>
-      </div>
-      <textarea [(ngModel)]="tournamentInfo.tournamentSet.addOn.rake"
-      class="form-control" aria-label="With textarea"></textarea>
-    </div>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Стек</span>
-      </div>
-      <textarea [(ngModel)]="tournamentInfo.tournamentSet.addOn.stack" class="form-control" aria-label="With textarea"></textarea>
     </div>
   </div>
 </div>
