@@ -1,0 +1,71 @@
+
+<div class="rounds-body d-flex row">
+  <div class="rounds-menu">
+    <div class="rounds-buttons">
+      <button class="rounds-menu_button">
+        Добавить
+      </button>
+      <div class="border"></div>
+      <div >
+        <button class="rounds-menu_button" >
+          Удалить
+        </button>
+      </div>
+      <div class="border"></div>
+      <button class="rounds-menu_button">
+        Импорт
+      </button>
+      <div class="border"></div>
+      <button class="rounds-menu_button">
+        Экспорт
+      </button>
+    </div>  
+  </div>
+  <div class="navigation d-flex justify-content-center ">
+    <div class="active-header"></div>
+    <div class="level-type-header">Раунд</div>
+    <div class="game-name-header">Название игры</div>
+    <div class="game-type-header">Тип игры</div>
+    <div class="duration-header">Длительность</div>
+    <div class="small-blind-header ">Small Blind</div>
+    <div class="big-blind-header">Big Bland</div>
+    <div class="ante-header">Ante</div>
+    <div class="start-time-header">Начало</div>
+    <div class="chip-up-header">Chip-up</div>    
+  </div>
+  <div class="d-flex w-100 round_block" *ngFor="let round of tournamentInfo.tournamentSet.rounds">
+    <div [class.showArroy]="round.active===true" class="active"></div>
+    <div class="rounds-order d-flex justify-content-start" *ngIf="round.levelType">
+      
+      <div class="level-type">
+          Раунд {{round.levelNumber}}
+      </div>
+      <div class="game-name">
+          {{round.gameName}}
+      </div>
+      <div class="game-type">
+          {{round.gameType}}
+      </div>
+      <div class="duration">{{round.duration}} мин</div>
+      <div class="small-blind">{{round.smallBlind}}</div>
+      <div class="big-blind">{{round.bigBlind}}</div>
+      <div class="ante">{{round.ante}}</div>
+      <div class="start-time">{{round.startTime}}</div>
+      <div class="chip-up"></div>
+    </div>
+    <div class="rounds-changed d-flex justify-content-start" *ngIf="!round.levelType">
+      <div class="level-type">
+          Перерыв {{round.levelNumber}}
+      </div>
+      <div class="game-name"></div>
+      <div class="game-type"></div>
+      <div class="duration">{{round.duration}} мин</div>
+      <div class="small-blind"></div>
+      <div class="big-blind"></div>
+      <div class="ante"></div>
+      <div class="start-time">{{round.startTime}}</div>
+      <div class="chip-up" *ngIf="round.chipUp===true">Chip Up</div>
+    </div>  
+  </div>
+</div>
+
