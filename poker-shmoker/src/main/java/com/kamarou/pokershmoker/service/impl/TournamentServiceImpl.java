@@ -7,6 +7,7 @@ import com.kamarou.pokershmoker.service.dto.converter.TournamentConverter;
 import com.kamarou.pokershmoker.service.dto.entity.TournamentDTO;
 import com.kamarou.pokershmoker.service.exception.NotFoundException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ public class TournamentServiceImpl implements TournamentService {
   @Override
   public TournamentDTO saveTournament(TournamentDTO tournamentDTO) {
     Tournament tournament = tournamentConverter.convertToEntity(tournamentDTO);
+    tournament.setRounds(Collections.EMPTY_SET);
     LOG.info("Create tournament: {}", tournament);
     return tournamentConverter.convertToDTO(tournamentRepository.save(tournament));
   }

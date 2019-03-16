@@ -2,14 +2,11 @@ package com.kamarou.pokershmoker.dao.entity;
 
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import org.hibernate.annotations.Proxy;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Table
-@Proxy(lazy = false)
-public class Game extends BaseEntity{
+@MappedSuperclass
+public class Game extends BaseEntity {
+
   @Column
   protected double commission;
 

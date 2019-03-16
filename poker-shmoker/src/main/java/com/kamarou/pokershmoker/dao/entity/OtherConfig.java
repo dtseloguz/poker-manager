@@ -23,7 +23,7 @@ public class OtherConfig extends Game {
   @Column
   private boolean configPresent;
 
-  @OneToOne(mappedBy = "otherConfig", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToOne(mappedBy = "otherConfig", fetch = FetchType.LAZY)
   private Tournament tournament;
 
   public OtherConfig() {
@@ -53,6 +53,18 @@ public class OtherConfig extends Game {
     return gameConfigType;
   }
 
+  public boolean isConfigPresent() {
+    return configPresent;
+  }
+
+  public void setConfigPresent(boolean configPresent) {
+    this.configPresent = configPresent;
+  }
+
+  public void setGameConfigType(GameConfigType gameConfigType) {
+    this.gameConfigType = gameConfigType;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -70,6 +82,11 @@ public class OtherConfig extends Game {
   }
 
   @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), gameConfigType, configPresent);
+  }
+
+  @Override
   public String toString() {
     return "OtherConfig{" +
         "gameConfigType=" + gameConfigType +
@@ -78,23 +95,6 @@ public class OtherConfig extends Game {
         ", chipsAmount=" + chipsAmount +
         ", id='" + id + '\'' +
         '}';
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), gameConfigType, configPresent);
-  }
-
-  public void setGameConfigType(GameConfigType gameConfigType) {
-    this.gameConfigType = gameConfigType;
-  }
-
-  public boolean isConfigPresent() {
-    return configPresent;
-  }
-
-  public void setConfigPresent(boolean configPresent) {
-    this.configPresent = configPresent;
   }
 
 }

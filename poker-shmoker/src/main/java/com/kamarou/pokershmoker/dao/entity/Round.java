@@ -192,15 +192,14 @@ public class Round extends BaseEntity {
         Double.compare(round.ante, ante) == 0 &&
         gameName == round.gameName &&
         gameType == round.gameType &&
-        roundType == round.roundType &&
-        Objects.equals(tournament, round.tournament);
+        roundType == round.roundType;
   }
 
   @Override
   public int hashCode() {
     return Objects
         .hash(super.hashCode(), position, number, duration, timeLeft, chipUp, gameName, gameType,
-            smallBlind, bigBlind, ante, roundType, tournament);
+            smallBlind, bigBlind, ante, roundType);
   }
 
   @Override
@@ -217,7 +216,6 @@ public class Round extends BaseEntity {
         ", bigBlind=" + bigBlind +
         ", ante=" + ante +
         ", roundType=" + roundType +
-        ", tournament=" + tournament +
         ", id='" + id + '\'' +
         '}';
   }

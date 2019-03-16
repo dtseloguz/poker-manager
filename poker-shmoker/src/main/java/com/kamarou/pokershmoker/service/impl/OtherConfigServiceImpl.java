@@ -40,17 +40,10 @@ public class OtherConfigServiceImpl implements OtherConfigService {
 
   @Transactional
   @Override
-  public OtherConfigDTO saveOtherConfig(OtherConfigDTO configDTO) {
-    OtherConfig otherConfig = configConverter.convertToEntity(configDTO);
-    LOG.info("Save other config");
-    return configConverter.convertToDTO(configRepository.save(otherConfig));
-  }
-
-  @Transactional
-  @Override
   public OtherConfigDTO updateOtherConfig(OtherConfigDTO configDTO) {
     LOG.info("Update other config");
-    Optional<OtherConfig> optionalConfig = configRepository.findById(configDTO.getId());
+    Optional<OtherConfig> optionalConfig = configRepository
+        .findOtherConfigByTournamentId(configDTO.getTournamentID());
     if (!optionalConfig.isPresent()) {
       LOG.error("Configuration with ID {} not found", configDTO.getId());
       throw new NotFoundException(NOT_FOUND_CONFIG);
@@ -64,29 +57,13 @@ public class OtherConfigServiceImpl implements OtherConfigService {
   }
 
   @Override
-  public OtherConfigDTO selectOtherConfigById(String id) {
-    Optional<OtherConfig> optionalConfig = configRepository.findById(id);
+  public OtherConfigDTO selectOtherConfigById(String tournamentId) {
+    Optional<OtherConfig> optionalConfig = configRepository
+        .findOtherConfigByTournamentId(tournamentId);
     if (!optionalConfig.isPresent()) {
-      LOG.error("Configuration with ID {} not found", id);
+      LOG.error("Configuration with ID {} not found", tournamentId);
       throw new NotFoundException(NOT_FOUND_CONFIG);
     }
     return configConverter.convertToDTO(optionalConfig.get());
-  }
-
-  @Transactional
-  @Override
-  public void deleteOtherConfig(String id) {
-    Optional<OtherConfig> optionalConfig = configRepository.findById(id);
-    if (!optionalConfig.isPresent()) {
-      LOG.error("Configuration with ID {} not found", id);
-      throw new NotFoundException(NOT_FOUND_CONFIG);
-    }
-    configRepository.deleteById(id);
-
-  }
-
-  @Override
-  public List<OtherConfigDTO> selectAllConfigs() {
-    return convertConfigList(configRepository.findAll());
   }
 }
