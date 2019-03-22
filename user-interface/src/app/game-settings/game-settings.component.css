@@ -1,8 +1,15 @@
 .game-component{
-    padding-top: 14px;
-    padding-left: 30px;
+    padding-top: 14px;    
+    padding-left: 10px;
+    padding-bottom: 50px;
 }
-
+a{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: normal;
+}
 h2{
     font-style: normal;
     font-weight: bold;
