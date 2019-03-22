@@ -84,8 +84,20 @@ public class RoundServiceImpl implements RoundService {
     }
     Round round = optionalRound.get();
     roundDTO.setId(round.getId());
+    round.setBigBlind(roundDTO.getBigBlind());
+    round.setAnte(roundDTO.getAnte());
+    round.setChipUp(roundDTO.isChipUp());
+    round.setDuration(roundDTO.getDuration());
+    round.setGameName(roundDTO.getGameName());
+    round.setGameType(roundDTO.getGameType());
+    round.setNumber(roundDTO.getNumber());
+    round.setPosition(roundDTO.getPosition());
+    round.setRoundType(roundDTO.getRoundType());
+    round.setTimeLeft(roundDTO.getTimeLeft());
+    round.setSmallBlind(roundDTO.getSmallBlind());
+    LOG.info("Update round {}", roundDTO);
     return roundConverter
-        .convertToDTO(roundRepository.save(roundConverter.convertToEntity(roundDTO)));
+        .convertToDTO(roundRepository.save(round));
   }
 
   @Override
