@@ -1,4 +1,4 @@
-package com.kamarou.pokershmoker.service.imp;
+package com.kamarou.pokershmoker.service.impl;
 
 import com.kamarou.pokershmoker.dao.entity.Player;
 import com.kamarou.pokershmoker.dao.entity.PlayerFilter;

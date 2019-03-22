@@ -1,6 +1,9 @@
 package com.kamarou.pokershmoker.service.dto;
 
-public interface Converter<DTO, Entity> {
+import com.kamarou.pokershmoker.dao.entity.BaseEntity;
+import java.io.Serializable;
+
+public interface Converter<DTO extends Serializable, Entity extends BaseEntity> {
 
   DTO convertToDTO(Entity entity);
 
