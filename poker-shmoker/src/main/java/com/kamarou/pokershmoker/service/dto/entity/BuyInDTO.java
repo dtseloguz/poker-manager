@@ -1,5 +1,9 @@
 package com.kamarou.pokershmoker.service.dto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,18 +30,24 @@ public class BuyInDTO implements Serializable {
   public BuyInDTO() {
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public String getId() {
     return id;
   }
 
+  @JsonIgnore
   public void setId(String id) {
     this.id = id;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public String getDate() {
     return date;
   }
 
+  @JsonIgnore
   public void setDate(String date) {
     this.date = date;
   }

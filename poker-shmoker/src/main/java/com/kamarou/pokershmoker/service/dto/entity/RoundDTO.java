@@ -1,8 +1,12 @@
 package com.kamarou.pokershmoker.service.dto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.kamarou.pokershmoker.dao.entity.GameName;
 import com.kamarou.pokershmoker.dao.entity.GameType;
 import com.kamarou.pokershmoker.dao.entity.RoundType;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -43,34 +47,46 @@ public class RoundDTO implements Serializable {
     this.tournamentID = tournamentID;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public String getTournamentID() {
     return tournamentID;
   }
 
+  @JsonIgnore
   public void setTournamentID(String tournamentID) {
     this.tournamentID = tournamentID;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public String getId() {
     return id;
   }
 
+  @JsonIgnore
   public void setId(String id) {
     this.id = id;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public int getPosition() {
     return position;
   }
 
+  @JsonIgnore
   public void setPosition(int position) {
     this.position = position;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public int getNumber() {
     return number;
   }
 
+  @JsonIgnore
   public void setNumber(int number) {
     this.number = number;
   }
@@ -83,10 +99,13 @@ public class RoundDTO implements Serializable {
     this.duration = duration;
   }
 
+  @ApiModelProperty(hidden = true, readOnly = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public int getTimeLeft() {
     return timeLeft;
   }
 
+  @JsonIgnore
   public void setTimeLeft(int timeLeft) {
     this.timeLeft = timeLeft;
   }

@@ -1,6 +1,10 @@
 package com.kamarou.pokershmoker.service.dto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.kamarou.pokershmoker.dao.entity.GameConfigType;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -27,18 +31,24 @@ public class OtherConfigDTO implements Serializable {
     this.tournamentID = tournamentID;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public String getTournamentID() {
     return tournamentID;
   }
 
+  @JsonIgnore
   public void setTournamentID(String tournamentID) {
     this.tournamentID = tournamentID;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public String getId() {
     return id;
   }
 
+  @JsonIgnore
   public void setId(String id) {
     this.id = id;
   }
