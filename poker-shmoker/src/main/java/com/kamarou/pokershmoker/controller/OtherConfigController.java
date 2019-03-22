@@ -2,21 +2,23 @@ package com.kamarou.pokershmoker.controller;
 
 import com.kamarou.pokershmoker.service.OtherConfigService;
 import com.kamarou.pokershmoker.service.dto.entity.OtherConfigDTO;
-import java.util.List;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(description = "API для управления не общими конфигами турнира")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value = "/poker-shmoker/configs/other")
+@RequestMapping(value = "/poker-shmoker/tournament/{tournamentId}/configs/other")
 public class OtherConfigController {
 
   private final OtherConfigService configService;
@@ -26,35 +28,19 @@ public class OtherConfigController {
     this.configService = configService;
   }
 
-  @PostMapping
-  public ResponseEntity<OtherConfigDTO> saveGeneralConfig(
-      @RequestBody OtherConfigDTO OtherConfigDTO) {
-    return ResponseEntity.status(HttpStatus.CREATED)
-        .body(configService.saveOtherConfig(OtherConfigDTO));
-  }
-
+  @ApiOperation(value = "Метод обновления конфигов турнира")
   @PutMapping
   public ResponseEntity<OtherConfigDTO> updateGeneralConfig(
-      @RequestBody OtherConfigDTO OtherConfigDTO) {
-    return ResponseEntity.ok()
-        .body(configService.updateOtherConfig(OtherConfigDTO));
+      @ApiParam(value = "ID турнира") @PathVariable String tournamentId,
+      @RequestBody OtherConfigDTO otherConfigDTO) {
+    otherConfigDTO.setTournamentID(tournamentId);
+    return ResponseEntity.ok().body(configService.updateOtherConfig(otherConfigDTO));
   }
 
-  @GetMapping(value = "/{generalConfigID}")
-  public ResponseEntity<OtherConfigDTO> selectGeneralConfig(
-      @PathVariable String generalConfigID) {
-    return ResponseEntity.ok(configService.selectOtherConfigById(generalConfigID));
-  }
-
+  @ApiOperation(value = "Метод получения неосновных конфигов турнира")
   @GetMapping
-  public ResponseEntity<List<OtherConfigDTO>> selectAllGeneralConfig() {
-    return ResponseEntity.ok(configService.selectAllConfigs());
-  }
-
-  @DeleteMapping(value = "/{generalConfigID}")
-  public ResponseEntity<OtherConfigDTO> deleteGeneralConfig(
-      @PathVariable String generalConfigID) {
-    configService.deleteOtherConfig(generalConfigID);
-    return ResponseEntity.ok().build();
+  public ResponseEntity<OtherConfigDTO> selectGeneralConfig(
+      @ApiParam(value = "ID турнира") @PathVariable String tournamentId) {
+    return ResponseEntity.ok(configService.selectOtherConfigById(tournamentId));
   }
 }

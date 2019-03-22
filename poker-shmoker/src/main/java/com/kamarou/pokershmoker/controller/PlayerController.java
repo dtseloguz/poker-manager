@@ -58,11 +58,18 @@ public class PlayerController {
   public ResponseEntity deletePlayer(
       @RequestParam(name = "ids", required = true) List<String> uuids) {
     playerService.deletePlayersById(uuids);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
   @ApiOperation(value = "Метод для получения игроков из базы данных с помощью фильтра",
-      notes = "Обязательно задавать начальное и конечно значение для выборки.")
+      notes = "Обязательно задавать начальное и конечно значение для выборки. "
+          + "Возможные значения:\n"
+          + "1) operatorType: \"EQUALS\" (чтобы выбрать игроков, которые произвели взнос), значения "
+          + "поля \"value\" в данном случае - \"true\" или \"false\"\n"
+          + "2) operatorType: \"LIKE\" (для выборки игроков по ФИО), значения "
+          + "поля \"value\" в данном случае - любые символы, что введёт пользователь\n"
+          + "3) operatorType: \"NO_FILTER\" (чтобы просто выбрать из базы игроков без всяких фильтров), "
+          + "значения поля \"value\" в данном случае - null, то есть вместо пустой строки null значение")
   @PostMapping(value = "/filter")
   public ResponseEntity<List<PlayerDTO>> selectPlayersByFilter(
       @RequestBody PlayerFilter playerFilter,

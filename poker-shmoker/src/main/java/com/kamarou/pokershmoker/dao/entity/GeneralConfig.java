@@ -23,7 +23,7 @@ public class GeneralConfig extends Game {
   @Column
   private double buyIn;
 
-  @OneToOne(mappedBy = "generalConfig", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToOne(mappedBy = "generalConfig", fetch = FetchType.LAZY)
   private Tournament tournament;
 
   public GeneralConfig() {
@@ -94,13 +94,12 @@ public class GeneralConfig extends Game {
     GeneralConfig that = (GeneralConfig) o;
     return Double.compare(that.buyIn, buyIn) == 0 &&
         Objects.equals(tournamentName, that.tournamentName) &&
-        Objects.equals(description, that.description) &&
-        Objects.equals(tournament, that.tournament);
+        Objects.equals(description, that.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), tournamentName, description, buyIn, tournament);
+    return Objects.hash(super.hashCode(), tournamentName, description, buyIn);
   }
 
   @Override

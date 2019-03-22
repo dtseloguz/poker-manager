@@ -75,12 +75,13 @@ public class Tournament extends BaseEntity {
     }
     Tournament that = (Tournament) o;
     return Objects.equals(generalConfig, that.generalConfig) &&
-        Objects.equals(otherConfig, that.otherConfig);
+        Objects.equals(otherConfig, that.otherConfig) &&
+        Objects.equals(rounds, that.rounds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), generalConfig, otherConfig);
+    return Objects.hash(super.hashCode(), generalConfig, otherConfig, rounds);
   }
 
   @Override
@@ -88,6 +89,7 @@ public class Tournament extends BaseEntity {
     return "Tournament{" +
         "generalConfig=" + generalConfig +
         ", otherConfig=" + otherConfig +
+        ", rounds=" + rounds +
         ", id='" + id + '\'' +
         '}';
   }

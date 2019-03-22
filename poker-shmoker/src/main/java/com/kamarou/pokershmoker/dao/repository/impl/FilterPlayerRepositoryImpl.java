@@ -41,7 +41,7 @@ public class FilterPlayerRepositoryImpl implements FilterPlayerRepository {
         players = entityManager.createNativeQuery(selectStr.toString(), Player.class)
             .setParameter(1, limit)
             .setParameter(2, offset)
-            .setParameter(3, "true".equals(playerFilter.getValue()))
+            .setParameter(3, "true".equals(playerFilter.getValue().toUpperCase()))
             .getResultList();
         break;
       }

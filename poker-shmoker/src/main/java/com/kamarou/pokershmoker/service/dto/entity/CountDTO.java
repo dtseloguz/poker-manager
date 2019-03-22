@@ -1,8 +1,13 @@
 package com.kamarou.pokershmoker.service.dto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 public class CountDTO {
+
   private Long count;
 
   public CountDTO(Long count) {
@@ -12,10 +17,13 @@ public class CountDTO {
   public CountDTO() {
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public Long getCount() {
     return count;
   }
 
+  @JsonIgnore
   public void setCount(Long count) {
     this.count = count;
   }

@@ -9,9 +9,9 @@ public interface RoundService {
 
   RoundDTO updateRound(RoundDTO roundDTO);
 
-  RoundDTO selectRoundById(String id);
+  RoundDTO selectRoundByTournamentIdAndPosition(String tournamentId, int position);
 
-  void deleteRoundById(String id);
+  void deleteRoundByTournamentIdAndPosition(String tournamentId, int position);
 
-  List<RoundDTO> selectRoundSortedByPosition();
+  List<RoundDTO> selectRoundsOrderByPosition(String tournamentId);
 }
