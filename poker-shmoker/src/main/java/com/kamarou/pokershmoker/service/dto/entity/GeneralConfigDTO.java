@@ -10,8 +10,6 @@ import java.util.Objects;
 public class GeneralConfigDTO implements Serializable {
 
   private String id;
-  private String tournamentName;
-  private String tournamentDescription;
   private double buyIn;
   private int chipsAmount;
   private double commission;
@@ -20,11 +18,9 @@ public class GeneralConfigDTO implements Serializable {
   public GeneralConfigDTO() {
   }
 
-  public GeneralConfigDTO(String id, String tournamentName, String tournamentDescription,
-      double buyIn, int chipsAmount, double commission, String tournamentID) {
+  public GeneralConfigDTO(String id, double buyIn, int chipsAmount, double commission,
+      String tournamentID) {
     this.id = id;
-    this.tournamentName = tournamentName;
-    this.tournamentDescription = tournamentDescription;
     this.buyIn = buyIn;
     this.chipsAmount = chipsAmount;
     this.commission = commission;
@@ -51,22 +47,6 @@ public class GeneralConfigDTO implements Serializable {
   @JsonIgnore
   public void setId(String id) {
     this.id = id;
-  }
-
-  public String getTournamentName() {
-    return tournamentName;
-  }
-
-  public void setTournamentName(String tournamentName) {
-    this.tournamentName = tournamentName;
-  }
-
-  public String getTournamentDescription() {
-    return tournamentDescription;
-  }
-
-  public void setTournamentDescription(String tournamentDescription) {
-    this.tournamentDescription = tournamentDescription;
   }
 
   public double getBuyIn() {
@@ -106,23 +86,18 @@ public class GeneralConfigDTO implements Serializable {
         chipsAmount == that.chipsAmount &&
         Double.compare(that.commission, commission) == 0 &&
         Objects.equals(id, that.id) &&
-        Objects.equals(tournamentName, that.tournamentName) &&
-        Objects.equals(tournamentDescription, that.tournamentDescription) &&
         Objects.equals(tournamentID, that.tournamentID);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, tournamentName, tournamentDescription, buyIn, chipsAmount, commission,
-        tournamentID);
+    return Objects.hash(id, buyIn, chipsAmount, commission, tournamentID);
   }
 
   @Override
   public String toString() {
     return "GeneralConfigDTO{" +
         "id='" + id + '\'' +
-        ", tournamentName='" + tournamentName + '\'' +
-        ", tournamentDescription='" + tournamentDescription + '\'' +
         ", buyIn=" + buyIn +
         ", chipsAmount=" + chipsAmount +
         ", commission=" + commission +
