@@ -11,15 +11,13 @@ public class GeneralConfigConverter implements Converter<GeneralConfigDTO, Gener
 
   @Override
   public GeneralConfigDTO convertToDTO(GeneralConfig config) {
-    return new GeneralConfigDTO(config.getId(), config.getTournamentName(), config.getDescription(),
-        config.getBuyIn(), config.getChipsAmount(), config.getCommission(),
-        config.getTournament().getId());
+    return new GeneralConfigDTO(config.getId(), config.getBuyIn(), config.getChipsAmount(),
+        config.getCommission(), config.getTournament().getId());
   }
 
   @Override
   public GeneralConfig convertToEntity(GeneralConfigDTO configDTO) {
     return new GeneralConfig(configDTO.getCommission(), configDTO.getChipsAmount(),
-        configDTO.getTournamentName(), configDTO.getTournamentDescription(), configDTO.getBuyIn(),
-        new Tournament());
+        configDTO.getBuyIn(), new Tournament());
   }
 }

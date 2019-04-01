@@ -35,7 +35,6 @@ public class TournamentConverter implements Converter<TournamentDTO, Tournament>
   @Override
   public TournamentDTO convertToDTO(Tournament entity) {
     GeneralConfigDTO configDTO = new GeneralConfigDTO(entity.getGeneralConfig().getId(),
-        entity.getGeneralConfig().getTournamentName(), entity.getGeneralConfig().getDescription(),
         entity.getGeneralConfig().getBuyIn(), entity.getGeneralConfig().getChipsAmount(),
         entity.getGeneralConfig().getCommission(),
         entity.getGeneralConfig().getTournament().getId());
@@ -47,7 +46,8 @@ public class TournamentConverter implements Converter<TournamentDTO, Tournament>
     return new TournamentDTO(entity.getId(),
         configDTO,
         otherConfigDTO,
-        entity.getRounds().stream().map(roundConverter::convertToDTO).collect(Collectors.toList()));
+        entity.getRounds().stream().map(roundConverter::convertToDTO).collect(Collectors.toList()),
+        entity.getTournamentName(), entity.getDescription());
   }
 
   @Override
@@ -57,7 +57,6 @@ public class TournamentConverter implements Converter<TournamentDTO, Tournament>
     GeneralConfigDTO generalConfigDTO = t.getGeneralConfigDTO();
     GeneralConfig generalConfig = new GeneralConfig(generalConfigDTO.getCommission(),
         generalConfigDTO.getChipsAmount(),
-        generalConfigDTO.getTournamentName(), generalConfigDTO.getTournamentDescription(),
         generalConfigDTO.getBuyIn(), tournament);
     tournament.setGeneralConfig(generalConfig);
 

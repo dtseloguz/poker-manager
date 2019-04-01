@@ -1,7 +1,6 @@
 package com.kamarou.pokershmoker.dao.entity;
 
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,12 +14,6 @@ import org.hibernate.annotations.Proxy;
 public class GeneralConfig extends Game {
 
   @Column
-  private String tournamentName;
-
-  @Column
-  private String description;
-
-  @Column
   private double buyIn;
 
   @OneToOne(mappedBy = "generalConfig", fetch = FetchType.LAZY)
@@ -29,11 +22,8 @@ public class GeneralConfig extends Game {
   public GeneralConfig() {
   }
 
-  public GeneralConfig(double commission, int chipsAmount, String tournamentName,
-      String description, double buyIn, Tournament tournament) {
+  public GeneralConfig(double commission, int chipsAmount, double buyIn, Tournament tournament) {
     super(commission, chipsAmount);
-    this.tournamentName = tournamentName;
-    this.description = description;
     this.buyIn = buyIn;
     this.tournament = tournament;
   }
@@ -41,8 +31,6 @@ public class GeneralConfig extends Game {
 
   public GeneralConfig(String tournamentName, String description, double buyIn,
       Tournament tournament) {
-    this.tournamentName = tournamentName;
-    this.description = description;
     this.buyIn = buyIn;
     this.tournament = tournament;
   }
@@ -54,22 +42,6 @@ public class GeneralConfig extends Game {
 
   public void setTournament(Tournament tournament) {
     this.tournament = tournament;
-  }
-
-  public String getTournamentName() {
-    return tournamentName;
-  }
-
-  public void setTournamentName(String tournamentName) {
-    this.tournamentName = tournamentName;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
   }
 
   public double getBuyIn() {
@@ -92,21 +64,17 @@ public class GeneralConfig extends Game {
       return false;
     }
     GeneralConfig that = (GeneralConfig) o;
-    return Double.compare(that.buyIn, buyIn) == 0 &&
-        Objects.equals(tournamentName, that.tournamentName) &&
-        Objects.equals(description, that.description);
+    return Double.compare(that.buyIn, buyIn) == 0;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), tournamentName, description, buyIn);
+    return Objects.hash(super.hashCode(), buyIn);
   }
 
   @Override
   public String toString() {
     return "GeneralConfig{" +
-        "tournamentName='" + tournamentName + '\'' +
-        ", description='" + description + '\'' +
         ", buyIn=" + buyIn +
         ", commission=" + commission +
         ", chipsAmount=" + chipsAmount +

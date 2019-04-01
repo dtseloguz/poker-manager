@@ -3,6 +3,7 @@ package com.kamarou.pokershmoker.service.impl;
 import com.kamarou.pokershmoker.dao.entity.Tournament;
 import com.kamarou.pokershmoker.dao.repository.TournamentRepository;
 import com.kamarou.pokershmoker.service.TournamentService;
+import com.kamarou.pokershmoker.service.dto.converter.RoundConverter;
 import com.kamarou.pokershmoker.service.dto.converter.TournamentConverter;
 import com.kamarou.pokershmoker.service.dto.entity.TournamentDTO;
 import com.kamarou.pokershmoker.service.exception.NotFoundException;
@@ -20,14 +21,16 @@ public class TournamentServiceImpl implements TournamentService {
 
   private final TournamentRepository tournamentRepository;
   private final TournamentConverter tournamentConverter;
+  private final RoundConverter roundConverter;
   private static final Logger LOG = LoggerFactory.getLogger(TournamentServiceImpl.class);
   private static final String TOURNAMENT_NOT_FOUND = "Турнир не найден";
 
   public TournamentServiceImpl(
-      TournamentRepository tournamentRepository,
-      TournamentConverter tournamentConverter) {
+      TournamentRepository tournamentRepository, TournamentConverter tournamentConverter,
+      RoundConverter roundConverter) {
     this.tournamentRepository = tournamentRepository;
     this.tournamentConverter = tournamentConverter;
+    this.roundConverter = roundConverter;
   }
 
   private List<TournamentDTO> convertToList(Collection<Tournament> players) {
@@ -69,5 +72,24 @@ public class TournamentServiceImpl implements TournamentService {
     }
     LOG.info("Delete tournament with ID: {}", id);
     tournamentRepository.deleteById(id);
+  }
+
+  @Override
+  public TournamentDTO updateTournament(TournamentDTO tournamentDTO) {
+    Optional<Tournament> optional = tournamentRepository.findById(tournamentDTO.getId());
+    if (!optional.isPresent()) {
+      LOG.error("Tournament not found");
+      throw new NotFoundException(TOURNAMENT_NOT_FOUND);
+    }
+    Tournament tournament = optional.get();
+    tournament.setTournamentName(tournamentDTO.getTournamentName());
+    tournament.setDescription(tournamentDTO.getTournamentDescription());
+    tournament
+        .setRounds(tournamentDTO.getRounds()
+            .stream()
+            .map(roundConverter::convertToEntity)
+            .collect(Collectors.toSet()));
+    LOG.info("Update tournament", tournament);
+    return tournamentConverter.convertToDTO(tournamentRepository.save(tournament));
   }
 }

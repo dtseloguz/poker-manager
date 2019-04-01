@@ -12,4 +12,6 @@ public interface TournamentService {
   List<TournamentDTO> selectAllTournaments();
 
   void deleteTournamentById(String id);
+
+  TournamentDTO updateTournament(TournamentDTO tournamentDTO);
 }

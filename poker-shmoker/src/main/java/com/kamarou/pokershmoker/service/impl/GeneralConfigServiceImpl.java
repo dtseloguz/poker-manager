@@ -50,8 +50,6 @@ public class GeneralConfigServiceImpl implements GeneralConfigService {
     }
     GeneralConfig generalConfig = optionalConfig.get();
     generalConfig.setBuyIn(configDTO.getBuyIn());
-    generalConfig.setDescription(configDTO.getTournamentDescription());
-    generalConfig.setTournamentName(configDTO.getTournamentName());
     generalConfig.setChipsAmount(configDTO.getChipsAmount());
     generalConfig.setCommission(configDTO.getCommission());
     return configConverter.convertToDTO(configRepository.save(generalConfig));

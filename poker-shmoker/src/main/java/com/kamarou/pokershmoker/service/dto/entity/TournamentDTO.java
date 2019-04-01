@@ -14,6 +14,8 @@ public class TournamentDTO implements Serializable {
   private GeneralConfigDTO generalConfigDTO;
   private OtherConfigDTO otherConfigDTO;
   private List<RoundDTO> rounds;
+  private String tournamentName;
+  private String tournamentDescription;
 
   public TournamentDTO() {
   }
@@ -21,11 +23,13 @@ public class TournamentDTO implements Serializable {
   public TournamentDTO(String id,
       GeneralConfigDTO generalConfigDTO,
       OtherConfigDTO otherConfigDTO,
-      List<RoundDTO> rounds) {
+      List<RoundDTO> rounds, String tournamentName, String tournamentDescription) {
     this.id = id;
     this.generalConfigDTO = generalConfigDTO;
     this.otherConfigDTO = otherConfigDTO;
     this.rounds = rounds;
+    this.tournamentName = tournamentName;
+    this.tournamentDescription = tournamentDescription;
   }
 
   @ApiModelProperty(readOnly = true, hidden = true)
@@ -39,29 +43,54 @@ public class TournamentDTO implements Serializable {
     this.id = id;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public GeneralConfigDTO getGeneralConfigDTO() {
     return generalConfigDTO;
   }
 
+  @JsonIgnore
   public void setGeneralConfigDTO(
       GeneralConfigDTO generalConfigDTO) {
     this.generalConfigDTO = generalConfigDTO;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public OtherConfigDTO getOtherConfigDTO() {
     return otherConfigDTO;
   }
 
+  @JsonIgnore
   public void setOtherConfigDTO(OtherConfigDTO otherConfigDTO) {
     this.otherConfigDTO = otherConfigDTO;
   }
 
+  @ApiModelProperty(readOnly = true, hidden = true)
+  @JsonProperty(access = Access.READ_ONLY)
   public List<RoundDTO> getRounds() {
     return rounds;
   }
 
+  @JsonIgnore
   public void setRounds(List<RoundDTO> rounds) {
     this.rounds = rounds;
+  }
+
+  public String getTournamentName() {
+    return tournamentName;
+  }
+
+  public void setTournamentName(String tournamentName) {
+    this.tournamentName = tournamentName;
+  }
+
+  public String getTournamentDescription() {
+    return tournamentDescription;
+  }
+
+  public void setTournamentDescription(String tournamentDescription) {
+    this.tournamentDescription = tournamentDescription;
   }
 
   @Override
@@ -73,15 +102,17 @@ public class TournamentDTO implements Serializable {
       return false;
     }
     TournamentDTO that = (TournamentDTO) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(generalConfigDTO, that.generalConfigDTO) &&
+    return Objects.equals(generalConfigDTO, that.generalConfigDTO) &&
         Objects.equals(otherConfigDTO, that.otherConfigDTO) &&
-        Objects.equals(rounds, that.rounds);
+        Objects.equals(rounds, that.rounds) &&
+        Objects.equals(tournamentName, that.tournamentName) &&
+        Objects.equals(tournamentDescription, that.tournamentDescription);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, generalConfigDTO, otherConfigDTO, rounds);
+    return Objects
+        .hash(generalConfigDTO, otherConfigDTO, rounds, tournamentName, tournamentDescription);
   }
 
   @Override
@@ -91,6 +122,8 @@ public class TournamentDTO implements Serializable {
         ", generalConfigDTO=" + generalConfigDTO +
         ", otherConfigDTO=" + otherConfigDTO +
         ", rounds=" + rounds +
+        ", tournamentName='" + tournamentName + '\'' +
+        ", tournamentDescription='" + tournamentDescription + '\'' +
         '}';
   }
 }

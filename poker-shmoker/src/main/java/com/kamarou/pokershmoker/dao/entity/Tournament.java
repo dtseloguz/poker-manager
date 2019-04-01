@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -28,14 +29,22 @@ public class Tournament extends BaseEntity {
   @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<Round> rounds = new HashSet<>();
 
+  @Column
+  private String tournamentName;
+
+  @Column
+  private String description;
+
   public Tournament() {
   }
 
   public Tournament(GeneralConfig generalConfig,
-      OtherConfig otherConfig, Set<Round> rounds) {
+      OtherConfig otherConfig, Set<Round> rounds, String tournamentName, String description) {
     this.generalConfig = generalConfig;
     this.otherConfig = otherConfig;
     this.rounds = rounds;
+    this.tournamentName = tournamentName;
+    this.description = description;
   }
 
   public GeneralConfig getGeneralConfig() {
@@ -62,6 +71,22 @@ public class Tournament extends BaseEntity {
     this.rounds = rounds;
   }
 
+  public String getTournamentName() {
+    return tournamentName;
+  }
+
+  public void setTournamentName(String tournamentName) {
+    this.tournamentName = tournamentName;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -76,12 +101,15 @@ public class Tournament extends BaseEntity {
     Tournament that = (Tournament) o;
     return Objects.equals(generalConfig, that.generalConfig) &&
         Objects.equals(otherConfig, that.otherConfig) &&
-        Objects.equals(rounds, that.rounds);
+        Objects.equals(rounds, that.rounds) &&
+        Objects.equals(tournamentName, that.tournamentName) &&
+        Objects.equals(description, that.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), generalConfig, otherConfig, rounds);
+    return Objects
+        .hash(super.hashCode(), generalConfig, otherConfig, rounds, tournamentName, description);
   }
 
   @Override
@@ -90,6 +118,8 @@ public class Tournament extends BaseEntity {
         "generalConfig=" + generalConfig +
         ", otherConfig=" + otherConfig +
         ", rounds=" + rounds +
+        ", tournamentName='" + tournamentName + '\'' +
+        ", description='" + description + '\'' +
         ", id='" + id + '\'' +
         '}';
   }
