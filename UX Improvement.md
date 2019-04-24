@@ -34,7 +34,7 @@
 * Подбор и добавление иконок для меню внутренних страниц.<br>
 До:<br>
 ![1](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/1.png)
-После:<br>
+<br>После:<br>
 ![2](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/2.png)
 
 * Добавление поисковой строки вместо иконки поиска с pop-up эффектом для меню внутренних страниц.<br>
