@@ -33,20 +33,28 @@
 
 * Подбор и добавление иконок для меню внутренних страниц.<br>
 До:<br>
+![1](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/1.png)
 После:<br>
+![2](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/2.png)
 
 * Добавление поисковой строки вместо иконки поиска с pop-up эффектом для меню внутренних страниц.<br>
 До:<br>
+![3](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/3.png)
 После:<br>
+![4](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/4.png)
 
 
 
 * Улучшение визуализации о взносах игроков.<br>
 До:<br>
+![5](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/5.png)
+![6](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/6.png)
 После:<br>
-
+![7](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/7.png)
+![8](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/8.png)
 
 * Создание единого UI kit'а для целостности приложения.<br>
+![9](https://github.com/KirillKomarov550503/poker-manager/blob/master/UX%20Images/9.png)
 
 
 
