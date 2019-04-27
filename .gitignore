@@ -37,4 +37,4 @@ bin
 out
 /build
 /target/
-
+/.vs/
