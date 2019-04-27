@@ -40,55 +40,30 @@ public class GeneralConfigServiceImpl implements GeneralConfigService {
 
   @Transactional
   @Override
-  public GeneralConfigDTO saveGeneralConfig(GeneralConfigDTO configDTO) {
-    LOG.info("Save general config");
-    GeneralConfig generalConfig = configConverter.convertToEntity(configDTO);
-    return configConverter.convertToDTO(generalConfig);
-  }
-
-  @Transactional
-  @Override
   public GeneralConfigDTO updateGeneralConfig(GeneralConfigDTO configDTO) {
     LOG.info("Update general config");
-    Optional<GeneralConfig> optionalConfig = configRepository.findById(configDTO.getId());
+    Optional<GeneralConfig> optionalConfig = configRepository
+        .findGeneralConfigByTournamentId(configDTO.getTournamentID());
     if (!optionalConfig.isPresent()) {
       LOG.error("Config with ID {} not found", configDTO.getId());
       throw new NotFoundException(NOT_FOUND_CONFIG);
     }
     GeneralConfig generalConfig = optionalConfig.get();
     generalConfig.setBuyIn(configDTO.getBuyIn());
-    generalConfig.setDescription(configDTO.getTournamentDescription());
-    generalConfig.setTournamentName(configDTO.getTournamentName());
     generalConfig.setChipsAmount(configDTO.getChipsAmount());
     generalConfig.setCommission(configDTO.getCommission());
     return configConverter.convertToDTO(configRepository.save(generalConfig));
   }
 
   @Override
-  public GeneralConfigDTO selectGeneralConfigById(String id) {
-    LOG.info("Select general config by id: {}", id);
-    Optional<GeneralConfig> optionalConfig = configRepository.findById(id);
+  public GeneralConfigDTO selectGeneralConfigById(String tournamentId) {
+    LOG.info("Select general config by id: {}", tournamentId);
+    Optional<GeneralConfig> optionalConfig = configRepository
+        .findGeneralConfigByTournamentId(tournamentId);
     if (!optionalConfig.isPresent()) {
-      LOG.error("General config with ID {} doesn't exist", id);
+      LOG.error("General config with ID {} doesn't exist", tournamentId);
       throw new NotFoundException(NOT_FOUND_CONFIG);
     }
     return configConverter.convertToDTO(optionalConfig.get());
-  }
-
-  @Transactional
-  @Override
-  public void deleteGeneralConfig(String id) {
-    LOG.info("Delete general config by id: {}", id);
-    Optional<GeneralConfig> optionalConfig = configRepository.findById(id);
-    if (!optionalConfig.isPresent()) {
-      LOG.error("General config with ID {} doesn't exist", id);
-      throw new NotFoundException(NOT_FOUND_CONFIG);
-    }
-    configRepository.deleteById(id);
-  }
-
-  @Override
-  public List<GeneralConfigDTO> selectAllConfigs() {
-    return convertConfigList(configRepository.findAll());
   }
 }

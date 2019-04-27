@@ -5,14 +5,7 @@ import java.util.List;
 
 public interface OtherConfigService {
 
-  OtherConfigDTO saveOtherConfig(OtherConfigDTO configDTO);
-
   OtherConfigDTO updateOtherConfig(OtherConfigDTO configDTO);
 
-  OtherConfigDTO selectOtherConfigById(String id);
-
-  void deleteOtherConfig(String id);
-
-  List<OtherConfigDTO> selectAllConfigs();
-
+  OtherConfigDTO selectOtherConfigById(String tournamentId);
 }

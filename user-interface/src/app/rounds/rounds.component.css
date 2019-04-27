@@ -1,0 +1,188 @@
+
+.rounds-body{
+    margin-top: 15px;
+    width: 100%;
+    columns: 10;
+}
+.rounds-menu{
+    display: flex;
+    margin-bottom: 12px;
+}
+.rounds-buttons{
+    display: flex;
+}
+.border{
+    height: 30px;
+    width: 1px;
+    background: #C4C4C4;
+    opacity: 0.5;
+    margin: 6px 18px 0 18px;
+    content: "";
+}
+.rounds-menu_button{
+    width:100px;
+    height: 40px;
+    background: #fff;
+    border:none;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 14px;
+    color: #576066;
+    font-family: 'Roboto', sans-serif;
+}
+.rounds-menu_button:hover{
+    color: #202124;
+}
+.line{
+    border: 1px solid #DADCDD;
+    border-bottom: none;
+}
+.navigation{
+    height: 60px;
+    width:100%;
+    padding: 20px 0;
+    border-top: 1px solid #DADCDD;
+    border-bottom: 1px solid #DADCDD;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #576066;
+    text-align: center;
+}
+.navigation div{
+    height: 20px;
+}
+.player-info,.payment_enable{
+    display: flex;
+}
+.round_block{
+    height: 42px;
+    padding-top: 13px;
+}
+.active{
+    width:5%;    
+    position: relative; 
+}
+.active-header{
+    width:2%; 
+}
+.level-type-header{
+    width: 10%; 
+}
+.game-name-header{
+    width:20%; 
+}
+.game-type-header{
+    width:15%; 
+}
+.duration-header{
+    width:14%; 
+}
+.small-blind-header{
+    width:9%;
+}
+.big-blind-header{
+    width:7%;
+}
+.ante-header{
+    width:7%;
+}
+.start-time-header{
+    width:10%;  
+}
+.chip-up-header{
+    width:16%;  
+}
+.showArroy::before{
+    position: absolute;
+    content: url('./down-arrow.svg');
+    left:50%;
+    top:-15%;
+}
+
+.rounds-order{
+    width: 95%;
+    text-align: center;
+}
+
+.level-type{
+    text-align: start;
+    width:10%;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #202124;
+}
+
+.game-name{
+    width: 21%;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #202124;
+    opacity: 0.5;
+}
+.game-type{
+    width: 13.5%;
+}
+.duration{
+    width:13%;
+    text-align: center;    
+}
+.duration,.start-time{
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    font-family: 'Roboto', sans-serif;
+    color: #202124;
+}
+.small-blind{
+    width:7%;
+    text-align: center;
+}
+.big-blind{
+    width:7%;
+    text-align: center;
+}
+.ante{
+    width:7%;
+    text-align: center;
+}
+.start-time{
+    width:14%;
+    text-align: center;
+}
+.rounds-changed{
+    width: 95%;
+}
+
+.game-type,.small-blind,.big-blind,.ante{
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: #202124;
+    opacity: 0.5;
+}
+.chip-up{
+    text-align: start;
+    width:9%;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;  
+    color: #FF0000;
+
+}
